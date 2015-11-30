@@ -61,7 +61,7 @@
 
 	<img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/>
 	
-<div style=" margin-left: 45px; margin-top: 15px;">
+<div style="margin-top: 60px; margin-right:45px; float:right ">
 	<form name="generate_report" action="" method="post" onsubmit="redirect(this);">
 		<input type="submit" name="act" value="Generate Report" />
 	</form>	 
@@ -88,7 +88,7 @@
 
 
 <center>
-<div id="login-overlay" class="modal-dialog"  style="width:800px;">
+<div id="login-overlay" class="modal-dialog"  style="width:800px; margin-bottom: 0px; margin-top: 0px; ">
      <div class="modal-content" id="modal-content" >
           <div class="modal-header" id="modal-header">
 				<h1>HAMS</h1>
@@ -130,7 +130,7 @@
 	 
 	 <tr class="row5"> 
 	 	<td style="padding-right: 10px"><b>Appointment Date: <sup>*</sup></b> </td> 
-	 	<td><input type="date" name="appointment_date"></td> 
+	 	<td><input type="date" name="appointment_date" required></td> 
 	 </tr>
 	 
  </tbody>	 

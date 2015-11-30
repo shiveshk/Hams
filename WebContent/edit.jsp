@@ -11,6 +11,13 @@
 <link rel="stylesheet" type="text/css" href="hams.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>hams</title>
+<script>
+  function redirect(elem){
+	     elem.setAttribute("action","generateReport.jsp");
+	     elem.submit();
+	}
+</script>
+  
  <style>
 .rela {
     position: relative;
@@ -45,7 +52,11 @@
 </b></div>
 <img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/> 
 
-
+<div style="margin-top: 60px; margin-right:45px; float:right ">
+	<form name="generate_report" action=" " method="post" onsubmit="redirect(this);">
+		<input type="submit" name="act" value="Generate Report" />
+	</form>	 
+</div>
 
 <div class="container" >
 
@@ -84,12 +95,12 @@
 	
 	<tr class="row5"> 
 	 	<td style="padding-right: 10px"><b>Appointment Date: <sup>*</sup></b> </td> 
-	 	<td><input type="date" name="appointment_date" value="${sessionScope.appointment_date}"></td> 
+	 	<td><input type="date" name="appointment_date" required value="${sessionScope.appointment_date} "></td> 
 	 </tr>
 	
 </table>
 
-<input type="submit" name="submit" value="submit"/>
+<input type="submit" name="submit" value="submit" style="margin-top: 20px;  "/>
 </div>
 </form>
 		</div>

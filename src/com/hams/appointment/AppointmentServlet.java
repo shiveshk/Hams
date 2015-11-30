@@ -25,7 +25,8 @@ public class AppointmentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	static final Logger LOGGER = Logger.getLogger(com.hams.appointment.AppointmentServlet.class);
-			
+				
+	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException ,NullPointerException {
 		
@@ -47,7 +48,7 @@ public class AppointmentServlet extends HttpServlet {
 		appointment_date1 = request.getParameter("appointment_date");
 		
 		
-		Date appointment_date = null ;
+		Date appointment_date = null;
 		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		
