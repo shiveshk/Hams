@@ -1,6 +1,9 @@
-package com.hams.servlets;
+package com.hams.appointment;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 
@@ -15,14 +18,18 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 
-@WebServlet("/PatientAppointmentServlet")
-public class PatientAppointmentServlet extends HttpServlet {
+@WebServlet("/AppointmentServlet")
+
+
+public class AppointmentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	static final Logger LOGGER = Logger.getLogger(PatientAppointmentServlet.class);
+	static final Logger LOGGER = Logger.getLogger(com.hams.appointment.AppointmentServlet.class);
 			
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException ,NullPointerException {
+		
+		LOGGER.info("entered into AppointmentServlet ");
 			
 		
 		//get data from index.jsp and save in local variables
@@ -30,11 +37,28 @@ public class PatientAppointmentServlet extends HttpServlet {
 		String patient_name = null;
 		String clinic_detail = null;
 		String time = null;
+		String appointment_date1 = null;
+		
 		
 		patient_mobile_number = request.getParameter("patient_mobile_number");
 		patient_name = request.getParameter("patient_name");
 		clinic_detail = request.getParameter("clinic_detail");
 		time = request.getParameter("time");
+		appointment_date1 = request.getParameter("appointment_date");
+		
+		
+		Date appointment_date = null ;
+		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		
+		
+		try {
+			appointment_date = originalFormat.parse(appointment_date1);
+			
+		} catch (ParseException e1) {
+			
+			e1.printStackTrace();
+		}
 		
 		
 		
@@ -42,10 +66,10 @@ public class PatientAppointmentServlet extends HttpServlet {
 		StringBuilder message = null;
 		try {
 			message = new StringBuilder(" Dear " + patient_name + " Confirmed Appt :  " + clinic_detail + 
-					".Approx Appointment time  " + time +  " . To cancel your appointment SMS CANCEL to 9108053229 .Call 18002700673 ");
+					". Approx Appointment time  " + time +  ". Appointment Date "+ appointment_date1 + " . To cancel your appointment SMS CANCEL to 9108053229 .Call 18002700673 ");
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.info(e);
+			LOGGER.error(e);
 		}
 		
 		//if message needed to be updated then store it in session to get further it in jsp to edit
@@ -55,6 +79,9 @@ public class PatientAppointmentServlet extends HttpServlet {
         session.setAttribute("clinic_detail", clinic_detail);
         session.setAttribute("time", time);
         session.setAttribute("message", message);
+        session.setAttribute("appointment_date", appointment_date1);
+        
+        
         
         
         //after clicking submit in appointment.jsp control will go to message.jsp to show message 
@@ -64,8 +91,9 @@ public class PatientAppointmentServlet extends HttpServlet {
 			dispatcher.forward(request,response);
 		} catch (ServletException e) {
 			e.printStackTrace();
+			LOGGER.error(e);
 		}
-        
+		LOGGER.info("exiting from AppointmentServlet ");
 		
 	}
 

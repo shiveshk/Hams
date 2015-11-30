@@ -9,13 +9,22 @@ sup {
     font-size: smaller;
     color : red;
 }
-
+#login-overlay {
+	width:500px;
+	
+}
 #img1 {
 	align: center;
 	margin: auto;
 	width: 100px;
 	bottom: 100px; 
     height: 100px; 
+}
+
+.relative {
+    position: relative;
+    left: 10px;
+    border: 3px solid #73AD21;
 }
 
 #img2 {
@@ -25,10 +34,13 @@ sup {
     height: 300px; 
     width: 1350px;
 }
+
 #img3 {
     float: right;
-    margin: 0 0 100px 100px;
+    margin: 20px 0px 100px 100px;
 }
+
+
 
 
 tr.row2 td {
@@ -40,6 +52,10 @@ tr.row3 td {
 }
 
 tr.row4 td {
+    padding-top: 20px;
+}
+
+tr.row5 td {
     padding-top: 20px;
 }
 

@@ -27,7 +27,7 @@ img {
 
 
 <body>
-<img src = "images/image1.png" alt="doctor2" id="img3"/> 
+
 
  <%
         if(session.isNew())
@@ -39,7 +39,7 @@ img {
  %>
 
 
-    <div id="login-overlay" class="modal-dialog">
+    <div id="login-overlay" class="modal-dialog" style="margin-top:100px;">
       <div class="modal-content">
           <div class="modal-header">
               <h4 class="modal-title" id="myModalLabel"><b>Login to Hams Patient Appointment </b></h4> 

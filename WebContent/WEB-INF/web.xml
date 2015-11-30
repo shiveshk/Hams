@@ -1,55 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0" metadata-complete="true" >
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" metadata-complete="true" version="3.0">
+  <description>
+
+</description>
   <display-name>Hams</display-name>
+  <listener>
+    <listener-class>
+             com.hams.appointment.ContextListener 
+    </listener-class>
+  </listener>
   <context-param>
     <param-name>log4j-config-location</param-name>
-    <param-value>WEB-INF/log4j.properties</param-value>
+    <param-value>log4j.properties</param-value>
   </context-param>
   <servlet>
-    <description></description>
-    <display-name>PatientAppointmentServlet</display-name>
-    <servlet-name>PatientAppointmentServlet</servlet-name>
-    <servlet-class>com.hams.servlets.PatientAppointmentServlet</servlet-class>
+    <servlet-name>generateReport</servlet-name>
+    <jsp-file>/generateReport.jsp</jsp-file>
   </servlet>
-  
   <servlet-mapping>
-    <servlet-name>PatientAppointmentServlet</servlet-name>
-    <url-pattern>/PatientAppointmentServlet</url-pattern>
+    <servlet-name>generateReport</servlet-name>
+    <url-pattern>/generateReport</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <display-name>AppointmentServlet</display-name>
+    <servlet-name>AppointmentServlet</servlet-name>
+    <servlet-class>com.hams.appointment.AppointmentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AppointmentServlet</servlet-name>
+    <url-pattern>/AppointmentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GenerateReportServlet</display-name>
+    <servlet-name>GenerateReportServlet</servlet-name>
+    <servlet-class>com.hams.appointment.GenerateReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GenerateReportServlet</servlet-name>
+    <url-pattern>/GenerateReportServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.hams.servlets.LoginServlet</servlet-class>
+    <servlet-class>com.hams.appointment.LoginServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
-    <display-name>SaveOrEditAppointmentServlet</display-name>
-    <servlet-name>SaveOrEditAppointmentServlet</servlet-name>
-    <servlet-class>com.hams.servlets.SaveOrEditAppointmentServlet</servlet-class>
+    <display-name>ConfirmAppointmentServlet</display-name>
+    <servlet-name>ConfirmAppointmentServlet</servlet-name>
+    <servlet-class>com.hams.appointment.ConfirmAppointmentServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SaveOrEditAppointmentServlet</servlet-name>
-    <url-pattern>/SaveOrEditAppointmentServlet</url-pattern>
+    <servlet-name>ConfirmAppointmentServlet</servlet-name>
+    <url-pattern>/ConfirmAppointmentServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-  <description></description>
+    <description></description>
     <display-name>LogoutServlet</display-name>
     <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>com.hams.servlets.LogoutServlet</servlet-class>
+    <servlet-class>com.hams.appointment.LogoutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
-  
-  
-  
 </web-app>

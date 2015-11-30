@@ -6,8 +6,18 @@
    <session-factory>
    <property name="hbm2ddl.auto">update</property>  
 <property name="dialect">org.hibernate.dialect.MySQLDialect</property>   
-   <property name="connection.pool_size">1</property>
+   <property name="connection.pool_size">10</property>
    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+<!-- Enable Hibernate's automatic session context management -->
+		
+		<property name="current_session_context_class">thread</property>
+		
+	<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property><!-- Disable the second-level cache -->
+	
+	<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		
+		<property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
 
    <!-- Assume hams is the database name -->
    <property name="hibernate.connection.url">
@@ -22,8 +32,9 @@
    </property>
 
    <!-- List of XML mapping files -->
-   <mapping resource="appointment.hbm.xml"/>
-   <mapping resource="user.hbm.xml"/>
+   
+   <mapping resource="testing_appointment.hbm.xml"/>
+   <mapping resource="testing_user.hbm.xml"/>
 
 </session-factory>
 </hibernate-configuration>

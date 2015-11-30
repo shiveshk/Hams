@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -10,23 +10,47 @@
 
 <link rel="stylesheet" type="text/css" href="hams.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Edit Appointment Data</title>
- 
+<title>hams</title>
+ <style>
+.rela {
+    position: relative;
+    left: 22px;
+    
+}
+
+.relative {
+    position: relative;
+    left: 10px;
+    border: 1px solid #73AD21;
+}
+
+#topcorner{
+    position:absolute;
+    margin: 0 0 100px 100px;
+ }
+</style>
 </head>
-<img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" />
-<img src = "images/image1.png" alt="doctor2" id="img3"/>  
+
+ 
 
 <body bgcolor='#E6E6FA'>
+<div style=" margin-top: 45px; margin-right:45px""><b>
+      <span style="float:right">
+      	<% 
+			String username = (String)request.getSession().getAttribute("name"); 
+			out.println("Welcome "+username);
+		%><br />
+		<a href="LogoutServlet">Logout</a>
+      </span>
+</b></div>
+<img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/> 
+
+
 
 <div class="container" >
-<% String username = (String)request.getSession().getAttribute("name"); 
-out.println("Welcome "+username);
-%>
-
-<a href="LogoutServlet">Logout</a>
 
 <center>
-<div id="login-overlay" class="modal-dialog" >
+<div id="login-overlay" class="modal-dialog" style="width:800px;">
      <div class="modal-content" >
           <div class="modal-header" >
 
@@ -34,7 +58,7 @@ out.println("Welcome "+username);
 	<p><b><font size=5>Clinic Appointment</font></b></p>
 	<p><font size=1><sup>*</sup> Required Fields</font></p>
 
-<form name="myForm" action="PatientAppointmentServlet" method="post" onsubmit="return validate()">
+<form name="myForm" action="AppointmentServlet" method="post" onsubmit="return validate()">
 	<div class="form-group">
 <table >
 
@@ -54,10 +78,15 @@ out.println("Welcome "+username);
 	 </tr>  
 
 	<tr class="row4">
-		<td><b>Approx Appointment Time: <sup>*</sup></b></td>
+		<td style="padding-right: 10px"><b>Approx Appointment Time: <sup>*</sup></b></td>
 		<td><input type="text" id="time" name="time" value="${sessionScope.time}" size=50 maxlength=5000 /> </td>
 	</tr>
-
+	
+	<tr class="row5"> 
+	 	<td style="padding-right: 10px"><b>Appointment Date: <sup>*</sup></b> </td> 
+	 	<td><input type="date" name="appointment_date" value="${sessionScope.appointment_date}"></td> 
+	 </tr>
+	
 </table>
 
 <input type="submit" name="submit" value="submit"/>
@@ -69,7 +98,7 @@ out.println("Welcome "+username);
 </center>
 </div>
 
-<img src = "images/hams1.jpg" alt="doctor" id="img2"/>
+
 
 
 </body>

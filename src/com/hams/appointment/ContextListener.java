@@ -1,4 +1,4 @@
-package com.hams.servlets;
+package com.hams.appointment;
 
 import java.io.File;
 
@@ -18,12 +18,13 @@ public class ContextListener implements ServletContextListener {
 	 */
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		// initialize log4j here
-		ServletContext context = event.getServletContext();
-		String log4jConfigFile = context.getInitParameter("log4j-config-location");
-		String fullPath = context.getRealPath("") + File.separator + log4jConfigFile;
 		
-		PropertyConfigurator.configure(fullPath);
+		// initialize log4j here even before the web application is started
+		
+			ServletContext context = event.getServletContext();
+			String log4jConfigFile = context.getInitParameter("log4j-config-location");
+			String fullPath = context.getRealPath("") + File.separator + log4jConfigFile;
+			PropertyConfigurator.configure(fullPath);
 		
 	}
 	

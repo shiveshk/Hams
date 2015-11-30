@@ -25,15 +25,15 @@ function validate()
    if (/^\d{10}$/.test(mobile_no)) {
        // value is ok, use it
    } else {
-       alert("Invalid number; must be ten digits")
-       number.focus()
-       return false
+       alert("Invalid number; must be ten digits");
+       number.focus();
+       return false;
    }
    
    //time validation
    var strval = document.forms["myForm"]["time"].value;
 
-   var strval1;
+   
      
    //minimum lenght is 6. example 1:2 AM
    if(strval.length < 6)

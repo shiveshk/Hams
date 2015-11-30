@@ -1,7 +1,7 @@
-package com.hams.servlets;
+package com.hams.appointment;
 
 import java.io.IOException;
-import com.hams.data.User;
+import com.hams.data.TestingUser;
 import java.io.PrintWriter;
 import org.apache.log4j.Logger;
 import org.apache.commons.codec.binary.*;
@@ -24,34 +24,59 @@ import java.util.List;
  * Servlet implementation class LoginServlet
  */
 @WebServlet("/LoginServlet")
+
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static final Logger LOGGER = Logger.getLogger(SaveOrEditAppointmentServlet.class);
+	
+	static final Logger LOGGER = Logger.getLogger(com.hams.appointment.LoginServlet.class);
+	
+private static final SessionFactory sessionFactory = buildSessionFactory();
+	
+	private static SessionFactory buildSessionFactory() {
+		try {
+			return new Configuration().configure().buildSessionFactory();
+		} catch (Throwable ex) {
+			System.err.println("Initial SessionFactory creation failed." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+		}
+	
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		LOGGER.info("entered into LoginServlet");
+		
 
         String name = request.getParameter("name");  
         String password1 = request.getParameter("password");  
         byte[] encodedBytes = Base64.encodeBase64(password1.getBytes());
         String password = new String(encodedBytes);
-        System.out.println(password);
-        
+                
         PrintWriter out = null ;
 		try {
 			out = response.getWriter();
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.info(e);
+			LOGGER.error(e);
 		} 
-
+		
+		
         //check login if value of authenticateUser(name ,password) will be true then login should be successful otherwise don't give permission
         boolean login_check = authenticateUser(name ,password);
         
         if( login_check == true ){  
+        	
+        LOGGER.info("entered into if of loginServlet to decide user is valid or not");
+
+        	
        
         HttpSession session = request.getSession();  
         session.setAttribute("name" , name); 
         
-        System.out.println("login successful" + name);
+        
         LOGGER.info("login successful");
 		String nextJSP = "/appointment.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
@@ -62,15 +87,20 @@ public class LoginServlet extends HttpServlet {
 		} catch (ServletException e) {
 			
 			e.printStackTrace();
+			LOGGER.error(e);
 			
 		} catch (IOException e)
 		{
 			e.printStackTrace();
+			LOGGER.error(e);
 		}
         }  
         
         else{  
         	/* login unsuccessful because of failed validation */
+        	
+        	LOGGER.info("entered into else of LoginServlet if user not entered valid credentials");
+
             
         	out.print("Sorry, username or password error!");  
             
@@ -83,8 +113,10 @@ public class LoginServlet extends HttpServlet {
 				dispatcher.forward(request,response);
 			} catch (ServletException e) {
 				e.printStackTrace();
+				LOGGER.error(e);
 			} catch(IOException e ){
 				e.printStackTrace();
+				LOGGER.error(e);
 			}
         	
         }  
@@ -92,51 +124,58 @@ public class LoginServlet extends HttpServlet {
  */
         
         out.close();  
+        
+        LOGGER.info(" exiting from LoginServlet ");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean authenticateUser(String name, String password) {
+		
 		//creating configuration object  
-		Configuration cfg = null;
-		try {
-			cfg = new Configuration();  
-			
-			//populates the data of the configuration file 
-			cfg.configure("hibernate.cfg.xml"); 
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			LOGGER.info(e);
-			
-		}
+		
+		LOGGER.info("entered into authenticateUser method of  LoginServlet to match user credentials with credential saved in database");
+
+		
+
 	    // creating session factory object  
-	    SessionFactory factory = null;
-		try {
-			factory = cfg.buildSessionFactory();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			LOGGER.info(e);
-		}  
+		
+		SessionFactory factory = getSessionFactory();
+		System.out.println("Session factory object created : " + factory);
+		Session session1 = factory.openSession();
+		
+ 
 	      
 	    //creating session object  
-	    Session session1 = null;
+		
+	    
+	    
 		try {
 			session1 = factory.openSession();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			LOGGER.info(e);
+			LOGGER.error(e);
 		}  
+		
 	      
 	    /*SQL_QUERY to get list of users from user table with same user_name and password as entered by user */
-        String SQL_QUERY = " from User u where u.user_name='" + name + "' and u.password='" + password + "'";
-        System.out.println(SQL_QUERY);
+        String SQL_QUERY = " from TestingUser u where u.user_name='" + name + "' and u.password='" + password + "'";
+        
         Query query = null ;
 		try {
 			query = session1.createQuery(SQL_QUERY);
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			LOGGER.error(e);
 		}
 		
         
-        List<User> list = query.list();
+        List<TestingUser> list = null;
+		try {
+			list = query.list();
+		} catch (HibernateException e1) {
+			
+			e1.printStackTrace();
+		}
         if (list.size() > 0) {
             session1.close();
             return true;
@@ -145,8 +184,17 @@ public class LoginServlet extends HttpServlet {
 			session1.close();
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			LOGGER.error(e);
 		}
+        
+
+		LOGGER.info("exiting from authenticateUser method of  LoginServlet ");
+		
         return false;
+        
+        
     	}
+			
 	 }
+
 
