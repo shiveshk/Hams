@@ -25,8 +25,8 @@ import org.hibernate.SessionFactory;
 
 import org.hibernate.cfg.Configuration;
 
-import com.hams.data.TestingAppointment;
-import com.hams.data.TestingUser;
+import com.hams.data.Appointment;
+import com.hams.data.User;
 
 
 /**
@@ -39,8 +39,10 @@ public class GenerateReportServlet extends HttpServlet {
 	
 	static final Logger LOGGER = Logger.getLogger(GenerateReportServlet.class);
 	
-private static final SessionFactory sessionFactory = buildSessionFactory();
+	//make sessionfactory object static so we will need this only once
+	private static final SessionFactory sessionFactory = buildSessionFactory();
 	
+	//build session factory
 	private static SessionFactory buildSessionFactory() {
 		try {
 			return new Configuration().configure().buildSessionFactory();
@@ -48,7 +50,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
-		}
+	}
 	
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -59,6 +61,8 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LOGGER.info("entered into dopost of GenerateReportServlet");
+		
+		//pick initial date & final date where we have to generate report
 		
 		String initial_date = request.getParameter("initial_date"); 
 		String final_date = request.getParameter("final_date"); 
@@ -72,8 +76,10 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 		
 		HttpSession session = request.getSession(true);
 		
+		//get who is logged in because we have to generate report only for admin
 		String login_user = session.getAttribute("name").toString();
 		
+		//define format of date 
 		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );
 		
@@ -84,9 +90,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 		     date1 = originalFormat.parse(initial_date);
 		     date2 = originalFormat.parse(final_date);
 		     
-		 
-		     
-		   } catch (ParseException ex) {
+		   	   } catch (ParseException ex) {
 		    	ex.printStackTrace();
 		    	LOGGER.error(ex);
 
@@ -94,11 +98,15 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 		   
 		
 		//check login if value of authenticateAdmin(login_user) will be true then login should be successful otherwise don't give permission
+		   
         boolean admin_check = authenticateAdmin(login_user);
 		
         if( admin_check == true ){  
         	
             LOGGER.info("entered into if of GenerateReportServlet only if user is admin");
+            
+            //call generateReport function only for valid user with admin access
+            
             generateReport( targetFormat.format(date1) , targetFormat.format(date2),request ,response);
             
             }  
@@ -109,6 +117,8 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
             	LOGGER.info("entered into else of GenerateReportServlet if admin not entered valid credentials");
 
             	/* redirect user again to appointment page */
+            	
+            	session.setAttribute("admin_check_response", "sorry , permission denied you have not admin access");	
             	
                 String nextJSP = "/appointment.jsp";
     			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
@@ -125,9 +135,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
             	
             }  
 		
-		
-		
-	}
+		}
 	
 
 		@SuppressWarnings("unchecked")
@@ -158,7 +166,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 	        
 
 
-		    String SQL_QUERY =  " from TestingAppointment t where t.time_stamp BETWEEN '"+ date1 +"' AND '"+ date2 +"'";
+		    String SQL_QUERY =  " from Appointment t where t.appointment_booked_date BETWEEN '"+ date1 +"' AND '"+ date2 +"'";
 		    
 	        Query query = null ;
 			try {
@@ -168,7 +176,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 				LOGGER.error(e);
 			}
 			
-			List<TestingAppointment> models = null;
+			List<Appointment> models = null;
 			try {
 				models = query.list();
 			} catch (HibernateException e1) {
@@ -232,7 +240,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 	    // creating session factory object  
 		
 		SessionFactory factory = getSessionFactory();
-		System.out.println("Session factory object created : " + factory);
+		
 		Session session1 = factory.openSession();
 		
  
@@ -249,9 +257,10 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 	    	
 		/* SQL_QUERY to fetch data for specified date  */
 		
-        String SQL_QUERY = "from TestingUser u where u.user_name='" + login_user + "' and u.admin ='" + true + "'";
+        String SQL_QUERY = "from User u where u.user_name='" + login_user + "' and u.admin ='" + true + "'";
         
         Query query = null ;
+        
 		try {
 			query = session1.createQuery(SQL_QUERY);
 		} catch (HibernateException e) {
@@ -259,7 +268,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 			LOGGER.error(e);
 		}
 		
-		List<TestingUser> list = null;
+		List<User> list = null;
 		try {
 			list = query.list();
 		} catch (HibernateException e1) {
@@ -280,6 +289,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 
 		LOGGER.info("exiting from authenticateUser method of  GenerateReportServlet ");
 		
+		//return false if user is not authenticated to generate report
         return false;
         
         

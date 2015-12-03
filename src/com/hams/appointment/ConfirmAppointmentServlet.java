@@ -17,6 +17,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import com.hams.data.Appointment;
 import com.hams.data.TestingAppointment;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,8 +38,11 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static final Logger LOGGER = Logger.getLogger(ConfirmAppointmentServlet.class);
 	
-private static final SessionFactory sessionFactory = buildSessionFactory();
+	//make sessionfactory object static so we will need this only once
 	
+	private static final SessionFactory sessionFactory = buildSessionFactory();
+	
+	//build session factory
 	private static SessionFactory buildSessionFactory() {
 		try {
 			return new Configuration().configure().buildSessionFactory();
@@ -72,19 +77,19 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 		String user_name = session.getAttribute("name").toString();
 		String appointment_date1 = session.getAttribute("appointment_date").toString();
 		
-		System.out.print("targetFormat_format hi"+appointment_date1);
 		
 		
-		
-		
-		
+	//check which button by user is clicked send or edit
 		
 		String act = request.getParameter("act");
+		
+	//entered into if construct of ConfirmAppointmentServlet to decide if edit button hit by user from message.jsp and send user to edit page
+		
 		if(act.equals("edit"))
 		{
-			LOGGER.info("entered into if construct of ConfirmAppointmentServlet to decide if edit button hit by user from message.jsp");
+			LOGGER.info("entered into if construct of ConfirmAppointmentServlet to decide if edit button hit by user from message.jsp and send user to edit page");
 			
-			//edit button was pressed so we don't need to save data there may be need to edit of data so send user at edit.jsp
+				//edit button was pressed so we don't need to save data there may be need to edit of data so send user at edit.jsp
 			
 			String nextJSP = "/edit.jsp";
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
@@ -95,8 +100,10 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 				LOGGER.error(e);
 			}
 			
-			LOGGER.info("exit from if construct of ConfirmAppointmentServlet ");
+			LOGGER.info("exit from if for edit construct of ConfirmAppointmentServlet ");
 		}
+		
+	//entered into if construct of ConfirmAppointmentServlet to decide if send button hit by user from message.jsp and send user to edit page
 		
 		if(act.equals("ok"))
 		{	
@@ -106,15 +113,14 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 
 	        
 			
-		// creating session factory object  
+	// creating session factory object  
 			
 			SessionFactory factory = getSessionFactory();
-			System.out.println("Session factory object created : " + factory);
 			Session session1 = factory.openSession();
 			
 			
 			
-		//creating transaction object  
+	//creating transaction object  
 			
 			Transaction t = null;
 			try {
@@ -148,7 +154,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 				e2.printStackTrace();
 			}
 			
-		    TestingAppointment appointment = new TestingAppointment();  
+		    Appointment appointment = new Appointment();  
 		    appointment.setClinic_detail(clinic_detail);
 		    appointment.setPatient_name(patient_name);
 		    appointment.setTime(time);
@@ -213,6 +219,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 			    conn.setUseCaches( false );
 			    
 			    
+			  // Creates a new data output stream to write data to the connection object conn , to send data at bhassms.
 			    
 			    try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
 				       wr.write( postData );
@@ -228,7 +235,8 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 					
 					if(responseCode == 200)
 					{
-						LOGGER.info("message is sent ");
+						LOGGER.info("response code is 200 message went successfully ");
+						
 						session.setAttribute("message_response", "message successfully sent");	
 						
 						 /* after sending message to patient side return user to appointment.jsp so user can do appointment for next patient */
@@ -272,7 +280,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 					LOGGER.error(e);
 				}
 				
-		        System.out.println("POST Response Code :: " + responseCode);
+		        
 		        
 		        }
 

@@ -10,6 +10,7 @@
     </id>  
     <property name="user_name"  column="user_name" />  
     <property name="password"  column="password" />
+    <property name="admin" column="admin" />
     
     
     

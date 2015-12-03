@@ -13,41 +13,14 @@
 	     elem.submit();
 	}
   </script>
-  
-
 <link rel="stylesheet" type="text/css" href="hams.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
 <title>hams</title>
-
-<style>
-​
-.rela {
-    position: relative;
-    left: 24px;
-    
-}
-
-.relative {
-    position: relative;
-    left: 10px;
-    border: 1px solid #73AD21;
-}
-
-#topcorner{
-    position:absolute;
-    margin: 0 0 100px 100px;
- }
-</style>
-
-
 </head>
 
 <body>
-
-
-
 <div style=" margin-top: 45px; margin-right:45px"><b>
       <span style="float:right">
       	<% 
@@ -60,19 +33,15 @@
 </b></div>
 
 	<img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/>
-	
-<div style="margin-top: 60px; margin-right:45px; float:right ">
-	<form name="generate_report" action="" method="post" onsubmit="redirect(this);">
-		<input type="submit" name="act" value="Generate Report" />
-	</form>	 
+
+<div style="margin-left: 45px; margin-top: 100px; position: absolute;  "><b>
+	 <a href="generateReport.jsp" onsubmit=" redirect(this);">Appointment Report</a></b>
 </div>
 
 <div class="container" >
 
-<div class="rela">
-<h3>
-<center>
-
+<div  style= "text-align:center">
+	<h3>
 <%
 	String message = (String)request.getSession().getAttribute("message_response");
 	if( message != null)
@@ -81,14 +50,25 @@
 	} 
 	session.setAttribute("message_response", "");
 %>
-
-</center>
-</h3>
+	</h3>
 </div>
 
+<div  style= "text-align:center">
+	<h3>
+<%
+	String message1 = (String)request.getSession().getAttribute("admin_check_response");
+	if( message1 != null)
+	{
+		out.println(message1);
+	} 
+	session.setAttribute("admin_check_response", "");
+%>
+	</h3>
+</div>
 
 <center>
-<div id="login-overlay" class="modal-dialog"  style="width:800px; margin-bottom: 0px; margin-top: 0px; ">
+
+<div id="login-overlay" class="modal-dialog"  style="width:800px; margin-bottom: 0px; margin-top: 0px;  ">
      <div class="modal-content" id="modal-content" >
           <div class="modal-header" id="modal-header">
 				<h1>HAMS</h1>
@@ -130,7 +110,7 @@
 	 
 	 <tr class="row5"> 
 	 	<td style="padding-right: 10px"><b>Appointment Date: <sup>*</sup></b> </td> 
-	 	<td><input type="date" name="appointment_date" required></td> 
+	 	<td><input type="date" id="appointment_date" name="appointment_date"   required></td> 
 	 </tr>
 	 
  </tbody>	 
@@ -145,10 +125,6 @@
 
 </center>
 </div>
-	
-
-
-
 
 </body>
 </html>

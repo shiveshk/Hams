@@ -18,30 +18,13 @@
 	}
 </script>
   
- <style>
-.rela {
-    position: relative;
-    left: 22px;
-    
-}
-
-.relative {
-    position: relative;
-    left: 10px;
-    border: 1px solid #73AD21;
-}
-
-#topcorner{
-    position:absolute;
-    margin: 0 0 100px 100px;
- }
-</style>
+ 
 </head>
 
  
 
 <body bgcolor='#E6E6FA'>
-<div style=" margin-top: 45px; margin-right:45px""><b>
+<div style=" margin-top: 45px; margin-right:45px"><b>
       <span style="float:right">
       	<% 
 			String username = (String)request.getSession().getAttribute("name"); 
@@ -52,10 +35,8 @@
 </b></div>
 <img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/> 
 
-<div style="margin-top: 60px; margin-right:45px; float:right ">
-	<form name="generate_report" action=" " method="post" onsubmit="redirect(this);">
-		<input type="submit" name="act" value="Generate Report" />
-	</form>	 
+<div style="margin-left: 45px; margin-top: 150px; position: absolute;  "><b>
+	 <a href="generateReport.jsp" onsubmit=" redirect(this);">Appointment Report</a></b>
 </div>
 
 <div class="container" >

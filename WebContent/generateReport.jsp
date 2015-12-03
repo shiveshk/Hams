@@ -9,6 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <script src="jquery-1.6.2.min.js"></script>
+<script>
+  function redirect(elem){
+	     elem.setAttribute("action","appointment.jsp");
+	     elem.submit();
+	}
 <script src="jquery-ui-1.8.15.custom.min.js"></script>
 <link rel="stylesheet" href="jquery/jqueryCalendar.css">
 <title>hams</title>
@@ -17,7 +22,7 @@
 <script>
  var tableToExcel = (function() {
       var uri = 'data:application/vnd.ms-excel;base64,'
-        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+      	, template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
         , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
         , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
       return function(table, name) {
@@ -28,25 +33,7 @@
     })()
 </script>
 <link rel="stylesheet" type="text/css" href="hams.css">
-<style>
-​
-.rela {
-    position: relative;
-    left: 24px;
-    
-}
 
-.relative {
-    position: relative;
-    left: 10px;
-    border: 1px solid #73AD21;
-}
-
-#topcorner{
-    position:absolute;
-    margin: 0 0 100px 100px;
- }
-</style>
 </head>
 <body>
 <div style=" margin-top: 0px; margin-right:45px"><b>
@@ -61,7 +48,8 @@
 </b>
 </div>
 
-<div>
+<div style="margin-left: 45px; margin-top: 10px; position: absolute;  "><b>
+	 <a href="appointment.jsp" onsubmit=" redirect(this);">prev</a></b>
 </div>
 
 <center>
@@ -98,29 +86,25 @@
                 	<th>appointment_booked_date</th>
                 </tr>
                  
-                 <s:forEach items="${data}" var="item">
-    				<tr>
-      						<td><s:out value="${item.appointment_id}" /></td>
-      						<td><s:out value="${item.patient_name}" /></td>
-      						<td><s:out value="${item.clinic_detail}" /></td>
-      						<td><s:out value="${item.time}" /></td>
-      						<td><s:out value="${item.patient_mobile_number}" /></td>
-      						<td><s:out value="${item.user_name}" /></td>
-      						<td><s:out value="${item.appointment_date}" /></td>
-      						<td><s:out value="${item.appointment_booked_date}" /></td>
+               <s:forEach items="${data}" var="item">
+    			<tr>
+      				<td><s:out value="${item.appointment_id}" /></td>
+      				<td><s:out value="${item.patient_name}" /></td>
+      				<td><s:out value="${item.clinic_detail}" /></td>
+      				<td><s:out value="${item.time}" /></td>
+      				<td><s:out value="${item.patient_mobile_number}" /></td>
+      				<td><s:out value="${item.user_name}" /></td>
+      				<td><s:out value="${item.appointment_date}" /></td>
+      				<td><s:out value="${item.appointment_booked_date}" /></td>
+
       						
-    				</tr>
+    			 </tr>
   				</s:forEach>
-  			<%
-            	session.setAttribute("mytable",request.getAttribute("data"));
-            %>
-  		</table>
-  			</div>
   			
+  		 </table>
+  	</div>
   			
-  			
-  			
-      	<div style="float:right"> Total Appointment : <s:out value="${size}" /> </div>   
+  			<div style="float:right"> Total Appointment : <s:out value="${size}" /> </div>   
 
 </form>
             

@@ -4,16 +4,18 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="com.hams.data.Appointment" table="appointment">  
+  <class name="com.hams.data.Appointment" table="testing_appointment">  
     <id name="appointment_id" type="long">  
      <generator class="increment"></generator>  
     </id>  
     <property name="patient_name"  column="patient_name" />  
     <property name="clinic_detail"  column="clinic_detail" />
-    <property name="time"  column ="time" /> 
+    <property name="time"  column="time" /> 
     <property name="patient_mobile_number" column="patient_mobile_number"></property>
     <property name="time_stamp" column="time_stamp" /> 
     <property name="user_name" column="user_name" /> 
+    <property name="appointment_date" column="appointment_date" /> 
+    <property name="appointment_booked_date" column="appointment_booked_date" /> 
     
     
     

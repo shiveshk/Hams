@@ -2,6 +2,8 @@ package com.hams.appointment;
 
 import java.io.IOException;
 import com.hams.data.TestingUser;
+import com.hams.data.User;
+
 import java.io.PrintWriter;
 import org.apache.log4j.Logger;
 import org.apache.commons.codec.binary.*;
@@ -158,7 +160,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 		
 	      
 	    /*SQL_QUERY to get list of users from user table with same user_name and password as entered by user */
-        String SQL_QUERY = " from TestingUser u where u.user_name='" + name + "' and u.password='" + password + "'";
+        String SQL_QUERY = " from User u where u.user_name='" + name + "' and u.password='" + password + "'";
         
         Query query = null ;
 		try {
@@ -169,7 +171,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 		}
 		
         
-        List<TestingUser> list = null;
+        List<User> list = null;
 		try {
 			list = query.list();
 		} catch (HibernateException e1) {
