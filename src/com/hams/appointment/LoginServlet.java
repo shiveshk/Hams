@@ -1,7 +1,7 @@
 package com.hams.appointment;
 
 import java.io.IOException;
-import com.hams.data.TestingUser;
+
 import com.hams.data.User;
 
 import java.io.PrintWriter;

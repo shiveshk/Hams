@@ -17,7 +17,16 @@
 <script src="jquery-ui-1.8.15.custom.min.js"></script>
 <link rel="stylesheet" href="jquery/jqueryCalendar.css">
 <title>hams</title>
+<style type="text/css">
+ tr:nth-child(even) {
+    background-color: #00FF00;
+}
 
+#testTable tr:nth-child(odd) {
+    background-color: #FFFF00;
+}
+
+</style>
 
 <script>
  var tableToExcel = (function() {
@@ -49,30 +58,44 @@
 </div>
 
 <div style="margin-left: 45px; margin-top: 10px; position: absolute;  "><b>
-	 <a href="appointment.jsp" onsubmit=" redirect(this);">prev</a></b>
+	 <a href="appointment.jsp" onsubmit=" redirect(this);">home</a></b>
 </div>
 
 <center>
 <div id="login-overlay" class="modal-dialog"  style="width:1000px; margin-top: 100px;">
      <div class="modal-content" id="modal-content" >
           <div class="modal-header" id="modal-header">
-<form action="GenerateReportServlet" method="post">
+<table style = "padding-bottom:10px;  display:block; ">
+
+<tr>
+
+
+<td style = "padding-right: 324px;">
+	<form action="GenerateReportServlet" method="post">
   
-  from 
-  <input type="date" name="initial_date">
+  	From 
+  		<input type="date" name="initial_date">
   
   
-  To
-  <input type="date" name="final_date">
-  <input type="submit">
+  	To
+  		<input type="date" name="final_date">
+  		<input type="submit">
   
 </form>
+</td>
+<td>			
+		<input type="button"   onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel">	
+</td>
+</tr>
+<tr></tr>
+			
+</table>
 
 <form>
 
-	 <input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel">	
 	 
-	<div id=div2> 
+	 
+	<div id="div2"> 
         <table border="1" id="testTable">
             <tr>
                 <tr>

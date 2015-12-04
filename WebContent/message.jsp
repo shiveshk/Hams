@@ -9,6 +9,12 @@
   <script src="validation.js"></script>
   
 <script type="text/javascript">
+
+function redirect(elem){
+	     elem.setAttribute("action","appointment.jsp");
+	     elem.submit();
+	}
+
 function myFunction(){
 	document.getElementById("wait_message").innerHTML = "message is being sent please wait";
 	
@@ -73,7 +79,9 @@ td:nth-of-type(2) {
 <img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/>
 
 
-
+<div style="margin-left: 45px; margin-top: 10px; position: absolute;  "><b>
+	 <a href="appointment.jsp" onsubmit=" redirect(this);">home</a></b>
+</div>
 
 
 <div class="rela">
