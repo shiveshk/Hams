@@ -12,10 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>hams</title>
 <script>
-  function redirect(elem){
-	     elem.setAttribute("action","generateReport.jsp");
-	     elem.submit();
-	}
+  
 </script>
   
  
@@ -23,28 +20,31 @@
 
  
 
-<body bgcolor='#E6E6FA'>
-<div style=" margin-top: 45px; margin-right:45px"><b>
-      <span style="float:right">
+<body>
+<div style=" margin-top: 45px; margin-right:45px ;float:right"><b>
       	<% 
 			String username = (String)request.getSession().getAttribute("name"); 
 			out.println("Welcome "+username);
-		%><br />
-		<a href="LogoutServlet">Logout</a>
-      </span>
+		%><br>
+      	<a href="LogoutServlet">Logout</a>
 </b></div>
+
 <img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/> 
-
-<div style="margin-left: 45px; margin-top: 150px; position: absolute;  "><b>
-	 <a href="generateReport.jsp" onsubmit=" redirect(this);">Appointment Report</a></b>
-</div>
-
-<div class="container" >
+<% 
+			Boolean admin_check = (Boolean)request.getSession().getAttribute("hide_report");
+			if(admin_check){
+			%>	
+				<div style="margin-left: 45px; margin-top: 50px; position: absolute;"><b>
+					<a href="generateReport.jsp" >Appointment Report</a></b>
+				</div>
+			<% 
+			}
+%>
 
 <center>
 <div id="login-overlay" class="modal-dialog" style="width:800px;">
      <div class="modal-content" >
-          <div class="modal-header" >
+          
 
 <h1>HAMS</h1>
 	<p><b><font size=5>Clinic Appointment</font></b></p>
@@ -88,11 +88,6 @@
 	</div>
 </div>
 </center>
-</div>
-
-
-
-
 </body>
 
 </html>

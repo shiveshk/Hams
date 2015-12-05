@@ -141,7 +141,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 	    // creating session factory object  
 		
 		SessionFactory factory = getSessionFactory();
-		System.out.println("Session factory object created : " + factory);
+		
 		Session session1 = factory.openSession();
 		
  
@@ -187,7 +187,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 			}
 		
 		
-		System.out.print(hide_report);
+		
 		
         if (list.size() > 0) {
             session1.close();

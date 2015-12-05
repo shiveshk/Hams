@@ -8,52 +8,34 @@
   <script src="validation.js"></script>
   
   <script>
-  function redirect(elem){
-	  	
-	     elem.setAttribute("action","generateReport.jsp");
-	     elem.submit();
-	     
-	}
+  
   </script>
 <link rel="stylesheet" type="text/css" href="hams.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
 <title>hams</title>
 </head>
 
 <body>
-
-
-
-<div style=" margin-top: 45px; margin-right:45px"><b>
-      <span style="float:right">
+<div style=" margin-top: 45px; margin-right:45px ;float:right"><b>
       	<% 
 			String username = (String)request.getSession().getAttribute("name"); 
 			out.println("Welcome "+username);
 		%><br>
-		<a href="LogoutServlet">Logout</a>
-      </span>
-
+      	<a href="LogoutServlet">Logout</a>
 </b></div>
 
-	<img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/>
-
-
-  <% 
-			Boolean hide = (Boolean)request.getSession().getAttribute("hide_report");
-			if(hide){
-				%>	
-				<div id="report" class="report" style="margin-left: 45px; margin-top: 100px; position: absolute;
-				"><b>	<a href="generateReport.jsp" onsubmit=" redirect(this);">Appointment Report</a></b>
+<img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/>
+<% 
+			Boolean admin_check = (Boolean)request.getSession().getAttribute("hide_report");
+			if(admin_check){
+			%>	
+				<div style="margin-left: 45px; margin-top: 50px; position: absolute;">
+				<b>	<a href="generateReport.jsp" >Appointment Report</a></b>
 				</div>
 			<% 
 			}
-			%>
-			 
-	 
+%>
 
-<div class="container" >
 	<h4 style= "text-align:center">
 <%
 	String message = (String)request.getSession().getAttribute("message_response");
@@ -65,32 +47,14 @@
 %>
 	</h4>
 
-
-	<h4 style= "text-align:center">
-<%
-	String message1 = (String)request.getSession().getAttribute("admin_check_response");
-	if( message1 != null)
-	{
-		out.println(message1);
-	} 
-	session.setAttribute("admin_check_response", "");
-%>
-	</h4>
-
-
 <center>
 
 <div id="login-overlay" class="modal-dialog"  style="width:800px; ">
      <div class="modal-content" id="modal-content" >
-          <div class="modal-header" id="modal-header">
+          
 				<h1>HAMS</h1>
-
-
 					<p><b><font size=5>Clinic Appointment</font></b></p>
 					<p><font size=1><b><sup>*</sup></b> Required Fields</font></p>
-
-
-
 <form name="myForm" action="AppointmentServlet" method="post"  onsubmit="return validate()" >
  	<div class="form-group">
 <table >
@@ -106,19 +70,15 @@
 	 	 <td><input type="text" id="patient_name" name="patient_name"  size=50 maxlength=5000 /></td>
 	 </tr> 
 	 
-	 
-
 	 <tr class="row3"> 
 	 	<td><b>Clinic Detail: <sup>*</sup></b> </td>
 	 	<td><input type="text" id="clinic_detail" name="clinic_detail"  size=50 maxlength=5000  /></td>
 	 </tr> 
 	 
-
 	 <tr class="row4"> 
 	 	<td style="padding-right: 10px"><b>Approx Appointment Time: <sup>*</sup></b> </td> 
 	 	<td><input type="text" id="time" name="time"  size=50 maxlength=5000 /></td> 
 	 </tr>
-	 
 	 
 	 <tr class="row5"> 
 	 	<td style="padding-right: 10px"><b>Appointment Date: <sup>*</sup></b> </td> 
@@ -136,7 +96,6 @@
 </div>
 
 </center>
-</div>
 
 </body>
 </html>

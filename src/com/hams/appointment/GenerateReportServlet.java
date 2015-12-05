@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
+
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +27,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.hams.data.Appointment;
-import com.hams.data.User;
 
 
 /**
@@ -77,8 +76,7 @@ public class GenerateReportServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		
-		//get who is logged in because we have to generate report only for admin
-		String login_user = session.getAttribute("name").toString();
+		
 		
 		//define format of date 
 		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -97,12 +95,12 @@ public class GenerateReportServlet extends HttpServlet {
 
 		       }
 		   
-		
-		//check login if value of authenticateAdmin(login_user) will be true then login should be successful otherwise don't give permission
+		 //check value of admin column in database if it is true then only we should generate report otherwise not 
 		   
-        boolean admin_check = authenticateAdmin(login_user);
+		   Boolean admin_check = (Boolean)request.getSession().getAttribute("hide_report");
+		   		
 		
-        if( admin_check == true ){  
+		   if( admin_check == true ){  
         	
             LOGGER.info("entered into if of GenerateReportServlet only if user is admin");
             
@@ -113,33 +111,9 @@ public class GenerateReportServlet extends HttpServlet {
             generateReport( targetFormat.format(date1) , targetFormat.format(date2),request ,response);
             
             }  
+	}
             
-        else{  
-            	/* login unsuccessful because of failed validation */
-            	
-            	LOGGER.info("entered into else of GenerateReportServlet if admin not entered valid credentials");
-
-            	/* redirect user again to appointment page */
-                
-            	
-            	session.setAttribute("admin_check_response", "sorry , permission denied you have not admin access");	
-            	
-                String nextJSP = "/appointment.jsp";
-    			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
-    			
-    			try {
-    				dispatcher.forward(request,response);
-    			} catch (ServletException e) {
-    				e.printStackTrace();
-    				LOGGER.error(e);
-    			} catch(IOException e ){
-    				e.printStackTrace();
-    				LOGGER.error(e);
-    			}
-            	
-            }  
-		
-		}
+        
 	
 
 		@SuppressWarnings("unchecked")
@@ -165,7 +139,7 @@ public class GenerateReportServlet extends HttpServlet {
 			
 		      
 		    	
-			/*SQL_QUERY to decide if user is admin or not   */
+			/*SQL_QUERY to get all records from Appointment table which have appointment between 2 dates entered by user to generate report   */
 			
 	        
 
@@ -229,75 +203,5 @@ public class GenerateReportServlet extends HttpServlet {
 			
 			
 		}
-		
-		
-	
-	@SuppressWarnings("unchecked")
-	public boolean authenticateAdmin(String login_user) {
-		
-		
-		
-			LOGGER.info("entered into authenticateAdmin method of  GenerateReportServlet to decide admin credential in database");
-
-		
-
-	    // creating session factory object  
-		
-		SessionFactory factory = getSessionFactory();
-		
-		Session session1 = factory.openSession();
-		
- 
-	    //creating session object  
-		
-	    try {
-			session1 = factory.openSession();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			LOGGER.error(e);
-		}  
-		
-	      
-	    	
-		/* SQL_QUERY to fetch data for specified date  */
-		
-        String SQL_QUERY = "from User u where u.user_name='" + login_user + "' and u.admin ='" + true + "'";
-        
-        Query query = null ;
-        
-		try {
-			query = session1.createQuery(SQL_QUERY);
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			LOGGER.error(e);
-		}
-		
-		List<User> list = null;
-		try {
-			list = query.list();
-		} catch (HibernateException e1) {
-						e1.printStackTrace();
-		}
-        if (list.size() > 0) {
-            
-        	
-            return true;
-        }
-        
-        try {
-			session1.close();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			LOGGER.error(e);
-		}
-        
-
-		LOGGER.info("exiting from authenticateUser method of  GenerateReportServlet ");
-		
-		//return false if user is not authenticated to generate report
-        return false;
-        
-        
-    	}
 }
 
