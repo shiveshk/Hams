@@ -4,7 +4,7 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="com.hams.data.Appointment" table="appointment">  
+  <class name="com.hams.data.Appointment" table="testing_appointment">  
     <id name="appointment_id" type="long">  
      <generator class="increment"></generator>  
     </id>  

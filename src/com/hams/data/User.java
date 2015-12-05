@@ -6,11 +6,11 @@ public class User {
 	
 	public User() {}
 	
-private String admin ;	
-public String getAdmin() {
+private Boolean admin ;	
+public Boolean getAdmin() {
 	return admin;
 }
-public void setAdmin(String admin) {
+public void setAdmin(Boolean admin) {
 	this.admin = admin;
 }
 private long user_id;

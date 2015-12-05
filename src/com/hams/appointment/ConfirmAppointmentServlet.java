@@ -300,8 +300,4 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 	        }
 				LOGGER.info("exiting from ConfirmAppointmentServlet ");
 		}
-	
-		
-    }
-
-
+}

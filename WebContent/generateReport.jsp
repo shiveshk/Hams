@@ -14,6 +14,7 @@
 	     elem.setAttribute("action","appointment.jsp");
 	     elem.submit();
 	}
+  
 <script src="jquery-ui-1.8.15.custom.min.js"></script>
 <link rel="stylesheet" href="jquery/jqueryCalendar.css">
 <title>hams</title>
@@ -56,6 +57,8 @@
 
 </b>
 </div>
+
+
 
 <div style="margin-left: 45px; margin-top: 10px; position: absolute;  "><b>
 	 <a href="appointment.jsp" onsubmit=" redirect(this);">home</a></b>

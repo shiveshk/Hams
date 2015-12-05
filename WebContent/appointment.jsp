@@ -9,8 +9,10 @@
   
   <script>
   function redirect(elem){
+	  	
 	     elem.setAttribute("action","generateReport.jsp");
 	     elem.submit();
+	     
 	}
   </script>
 <link rel="stylesheet" type="text/css" href="hams.css">
@@ -21,6 +23,9 @@
 </head>
 
 <body>
+
+
+
 <div style=" margin-top: 45px; margin-right:45px"><b>
       <span style="float:right">
       	<% 
@@ -34,14 +39,22 @@
 
 	<img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/>
 
-<div style="margin-left: 45px; margin-top: 100px; position: absolute;  "><b>
-	 <a href="generateReport.jsp" onsubmit=" redirect(this);">Appointment Report</a></b>
-</div>
+
+  <% 
+			Boolean hide = (Boolean)request.getSession().getAttribute("hide_report");
+			if(hide){
+				%>	
+				<div id="report" class="report" style="margin-left: 45px; margin-top: 100px; position: absolute;
+				"><b>	<a href="generateReport.jsp" onsubmit=" redirect(this);">Appointment Report</a></b>
+				</div>
+			<% 
+			}
+			%>
+			 
+	 
 
 <div class="container" >
-
-<div  style= "text-align:center">
-	<h3>
+	<h4 style= "text-align:center">
 <%
 	String message = (String)request.getSession().getAttribute("message_response");
 	if( message != null)
@@ -50,11 +63,10 @@
 	} 
 	session.setAttribute("message_response", "");
 %>
-	</h3>
-</div>
+	</h4>
 
-<div  style= "text-align:center">
-	<h3>
+
+	<h4 style= "text-align:center">
 <%
 	String message1 = (String)request.getSession().getAttribute("admin_check_response");
 	if( message1 != null)
@@ -63,12 +75,12 @@
 	} 
 	session.setAttribute("admin_check_response", "");
 %>
-	</h3>
-</div>
+	</h4>
+
 
 <center>
 
-<div id="login-overlay" class="modal-dialog"  style="width:800px; margin-bottom: 0px; margin-top: 0px;  ">
+<div id="login-overlay" class="modal-dialog"  style="width:800px; ">
      <div class="modal-content" id="modal-content" >
           <div class="modal-header" id="modal-header">
 				<h1>HAMS</h1>

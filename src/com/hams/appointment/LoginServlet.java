@@ -67,7 +67,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 		
 		
         //check login if value of authenticateUser(name ,password) will be true then login should be successful otherwise don't give permission
-        boolean login_check = authenticateUser(name ,password);
+        boolean login_check = authenticateUser(name ,password, request);
         
         if( login_check == true ){  
         	
@@ -77,7 +77,6 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
        
         HttpSession session = request.getSession();  
         session.setAttribute("name" , name); 
-        
         
         LOGGER.info("login successful");
 		String nextJSP = "/appointment.jsp";
@@ -131,7 +130,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public boolean authenticateUser(String name, String password) {
+	public boolean authenticateUser(String name, String password, HttpServletRequest request) {
 		
 		//creating configuration object  
 		
@@ -178,8 +177,24 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 			
 			e1.printStackTrace();
 		}
+		
+		Boolean hide_report = null;
+
+			for ( User user : list ) {
+				hide_report = user.getAdmin();
+			    
+			    
+			}
+		
+		
+		System.out.print(hide_report);
+		
         if (list.size() > 0) {
             session1.close();
+            
+            HttpSession session = request.getSession();  
+            session.setAttribute("hide_report" , hide_report );
+            
             return true;
         }
         try {
@@ -196,7 +211,5 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
         
         
     	}
+}
 			
-	 }
-
-

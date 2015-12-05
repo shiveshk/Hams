@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -105,6 +106,8 @@ public class GenerateReportServlet extends HttpServlet {
         	
             LOGGER.info("entered into if of GenerateReportServlet only if user is admin");
             
+            
+            
             //call generateReport function only for valid user with admin access
             
             generateReport( targetFormat.format(date1) , targetFormat.format(date2),request ,response);
@@ -117,6 +120,7 @@ public class GenerateReportServlet extends HttpServlet {
             	LOGGER.info("entered into else of GenerateReportServlet if admin not entered valid credentials");
 
             	/* redirect user again to appointment page */
+                
             	
             	session.setAttribute("admin_check_response", "sorry , permission denied you have not admin access");	
             	
@@ -276,6 +280,7 @@ public class GenerateReportServlet extends HttpServlet {
 		}
         if (list.size() > 0) {
             
+        	
             return true;
         }
         
