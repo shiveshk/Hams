@@ -7,9 +7,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="validation.js"></script>
   
-  <script>
   
-  </script>
 <link rel="stylesheet" type="text/css" href="hams.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>hams</title>
@@ -49,9 +47,9 @@
 
 <center>
 
-<div id="login-overlay" class="modal-dialog"  style="width:800px; ">
+<div id="login-overlay" class="modal-dialog"  style="width:800px;  ">
      <div class="modal-content" id="modal-content" >
-          
+          <div class="modal-header" >
 				<h1>HAMS</h1>
 					<p><b><font size=5>Clinic Appointment</font></b></p>
 					<p><font size=1><b><sup>*</sup></b> Required Fields</font></p>
@@ -62,27 +60,27 @@
  	
  	 <tr class="row1">
 	 	 <td><b>Patient mobile Number: <sup>*</sup></b> </td>
-	 	 <td><input type="text" id="patient_mobile_number" name="patient_mobile_number"  size=50 maxlength=20 /></td>
+	 	 <td><input type="text" id="patient_mobile_number" name="patient_mobile_number"  size=50 maxlength=20  placeholder="mobile_number" title="Please enter your patient mobile number"/></td>
 	 </tr>
  	
 	 <tr class="row2">
 	 	 <td><b>Patient Name: <sup>*</sup></b> </td>
-	 	 <td><input type="text" id="patient_name" name="patient_name"  size=50 maxlength=5000 /></td>
+	 	 <td><input type="text" id="patient_name" name="patient_name"  size=50 maxlength=5000 placeholder="patient_name" title="Please enter patient name"/></td>
 	 </tr> 
 	 
 	 <tr class="row3"> 
 	 	<td><b>Clinic Detail: <sup>*</sup></b> </td>
-	 	<td><input type="text" id="clinic_detail" name="clinic_detail"  size=50 maxlength=5000  /></td>
+	 	<td><input type="text" id="clinic_detail" name="clinic_detail"  size=50 maxlength=5000  placeholder="clinic detail" title="Please enter clinic detail"/></td>
 	 </tr> 
 	 
 	 <tr class="row4"> 
 	 	<td style="padding-right: 10px"><b>Approx Appointment Time: <sup>*</sup></b> </td> 
-	 	<td><input type="text" id="time" name="time"  size=50 maxlength=5000 /></td> 
+	 	<td><input type="text" id="time" name="time"  size=50 maxlength=5000 placeholder="time" title="Please enter time"/></td> 
 	 </tr>
 	 
 	 <tr class="row5"> 
 	 	<td style="padding-right: 10px"><b>Appointment Date: <sup>*</sup></b> </td> 
-	 	<td><input type="date" id="appointment_date" name="appointment_date"   required></td> 
+	 	<td><input type="date" id="appointment_date" name="appointment_date"   placeholder="appointment_date" title="Please enter appointment date" required ></td> 
 	 </tr>
 	 
  </tbody>	 

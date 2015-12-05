@@ -11,15 +11,7 @@
 <link rel="stylesheet" type="text/css" href="hams.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>hams</title>
-<script>
-  
-</script>
-  
- 
 </head>
-
- 
-
 <body>
 <div style=" margin-top: 45px; margin-right:45px ;float:right"><b>
       	<% 
@@ -42,9 +34,9 @@
 %>
 
 <center>
-<div id="login-overlay" class="modal-dialog" style="width:800px;">
+<div id="login-overlay" class="modal-dialog" style="width:800px; ">
      <div class="modal-content" >
-          
+          <div class="modal-header" >
 
 <h1>HAMS</h1>
 	<p><b><font size=5>Clinic Appointment</font></b></p>
@@ -56,27 +48,27 @@
 
 	<tr class="row1">
 	 	 <td><b>Patient mobile Number: <sup>*</sup></b> </td>
-	 	 <td><input type="text" id="patient_mobile_number" name="patient_mobile_number" value="${sessionScope.patient_mobile_number}" size=50 maxlength=20 /></td>
+	 	 <td><input type="text" id="patient_mobile_number" name="patient_mobile_number" value="${sessionScope.patient_mobile_number}" placeholder="mobile_number" size=50 maxlength=20 /></td>
 	</tr>
 
 	<tr class="row2">
 		<td><b>Patient Name: <sup>*</sup></b></td>
-		<td><input type="text" id="patient_name" name="patient_name" value="${sessionScope.patient_name}" size=50 maxlength=5000 /> </td>
+		<td><input type="text" id="patient_name" name="patient_name" value="${sessionScope.patient_name}" placeholder="patient_name" size=50 maxlength=5000 /> </td>
 	</tr>
 
 	<tr class="row3"> 
 	 	<td><b>Clinic Detail: <sup>*</sup></b> </td>
-	 	<td><input type="text" id="clinic_detail" name="clinic_detail" value="${sessionScope.clinic_detail}" size=50 maxlength=5000  /></td>
+	 	<td><input type="text" id="clinic_detail" name="clinic_detail" value="${sessionScope.clinic_detail}" placeholder="clinic_detail" size=50 maxlength=5000  /></td>
 	 </tr>  
 
 	<tr class="row4">
 		<td style="padding-right: 10px"><b>Approx Appointment Time: <sup>*</sup></b></td>
-		<td><input type="text" id="time" name="time" value="${sessionScope.time}" size=50 maxlength=5000 /> </td>
+		<td><input type="text" id="time" name="time" value="${sessionScope.time}" placeholder="time" size=50 maxlength=5000 /> </td>
 	</tr>
 	
 	<tr class="row5"> 
 	 	<td style="padding-right: 10px"><b>Appointment Date: <sup>*</sup></b> </td> 
-	 	<td><input type="date" name="appointment_date" required value="${sessionScope.appointment_date} "></td> 
+	 	<td><input type="date" name="appointment_date" required value="${sessionScope.appointment_date} placeholder="appointment_date" "></td> 
 	 </tr>
 	
 </table>

@@ -28,7 +28,7 @@ public class Appointment {
 	
 
 	private String appointment_date ;
-	private Date appointment_booked_date ;
+	private String appointment_booked_date ;
 	
 	public String getAppointment_date() {
 		return appointment_date;
@@ -38,11 +38,11 @@ public class Appointment {
 		this.appointment_date = appointment_date1;
 	}
 
-	public Date getAppointment_booked_date() {
+	public String getAppointment_booked_date() {
 		return appointment_booked_date;
 	}
 
-	public void setAppointment_booked_date(Date appointment_booked_date) {
+	public void setAppointment_booked_date(String appointment_booked_date) {
 		this.appointment_booked_date = appointment_booked_date;
 	}
 

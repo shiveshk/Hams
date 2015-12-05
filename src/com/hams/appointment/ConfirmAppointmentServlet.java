@@ -4,11 +4,9 @@ package com.hams.appointment;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
-import java.util.Date;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -17,9 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
 import com.hams.data.Appointment;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -91,6 +87,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 			
 				//edit button was pressed so we don't need to save data there may be need to edit of data so send user at edit.jsp
 			
+			
 			String nextJSP = "/edit.jsp";
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 			try {
@@ -103,99 +100,15 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 			LOGGER.info("exit from if for edit construct of ConfirmAppointmentServlet ");
 		}
 		
-	//entered into if construct of ConfirmAppointmentServlet to decide if send button hit by user from message.jsp and send user to edit page
+	/*entered into if construct of ConfirmAppointmentServlet to decide if send button hit by user from message.jsp
+		and save data entered by user in database and send message to patients*/
 		
 		if(act.equals("ok"))
 		{	
-			LOGGER.info("entered into if construct of ConfirmAppointmentServlet to decide if ok button hit by user from message.jsp");
-			
-			//send button was pressed so we save data in our database and send message to patient side
-
-	        
-			
-	// creating session factory object  
-			
-			SessionFactory factory = getSessionFactory();
-			Session session1 = factory.openSession();
+			LOGGER.info("entered into if construct of ConfirmAppointmentServlet as send button clicked so save data and send message");
 			
 			
-			
-	//creating transaction object  
-			
-			Transaction t = null;
-			try {
-				t = session1.beginTransaction();
-			} catch (HibernateException e) {
-				e.printStackTrace();
-				LOGGER.error(e);
-				
-			}  
-			// 1) create a java calendar instance
-			
-			Calendar calendar = Calendar.getInstance();
-			 
-			// 2) get a java.util.Date from the calendar instance.
-			//this date will represent the current instant, or "now".
-			
-			java.util.Date now = calendar.getTime();
-			
-			 
-			// 3) a java current time (now) instance
-			java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
-			//Date d = new Date(currentTimestamp );
-			
-			//method 1
-			Date dateWithoutTime = null;
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");      
-		    try {
-				 dateWithoutTime = sdf.parse(sdf.format(new Date()));
-			} catch (ParseException e2) {
-				
-				e2.printStackTrace();
-			}
-			
-		    Appointment appointment = new Appointment();  
-		    appointment.setClinic_detail(clinic_detail);
-		    appointment.setPatient_name(patient_name);
-		    appointment.setTime(time);
-		    appointment.setPatient_mobile_number(patient_mobile_number);
-		    appointment.setTime_stamp(currentTimestamp);
-		    appointment.setUser_name(user_name);
-		    appointment.setAppointment_date(appointment_date1);
-		    
-			appointment.setAppointment_booked_date(dateWithoutTime);
-		    
-		    
-		    
-		    
-		    //persisting the object
-		    
-		    try {
-				session1.save(appointment);  
-			} catch (HibernateException e) {
-				
-				e.printStackTrace();
-				LOGGER.error(e);
-			}
-		    
-		    //transaction is committed 
-		    
-	    t.commit(); 
-	    
-	    //close session 
-	    try {
-			session1.close();
-		} catch (HibernateException e) {
-			
-			e.printStackTrace();
-			LOGGER.error(e);
-		}  
-			
-			
-			
-
-	        
-		    /* post method application to request for bhashsms api, so that patient get message  
+			/* post method application to request for bhashsms api, so that patient get message  
 		    set 7 urlParameters like user ,password ,sender ,phone ,message ,priority and type needed to use api of bhashsms*/
 		    
 		    String urlParameters  = "user=hamsind&pass=12345&sender=HAMSIN&phone="+patient_mobile_number+"&text="+message+"&priority=ndnd&stype=normal";
@@ -230,6 +143,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 				    }
 			    
 			    int responseCode = 0;
+			    
 				try {
 					responseCode = conn.getResponseCode();
 					
@@ -298,6 +212,85 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 			
 	        
 	        }
+			
+	//send button was pressed so we save data in our database and send message to patient side
+	// creating session factory object  
+			
+			SessionFactory factory = getSessionFactory();
+			Session session1 = null;
+			try {
+				session1 = factory.openSession();
+			} catch (HibernateException e2) {
+				
+				e2.printStackTrace();
+				LOGGER.error(e2);
+
+			}
+			
+			
+			
+	//creating transaction object  
+			
+			Transaction t = null;
+			try {
+				t = session1.beginTransaction();
+			} catch (HibernateException e) {
+				e.printStackTrace();
+				LOGGER.error(e);
+				
+			}  
+			// 1) create a java calendar instance
+			
+			Calendar calendar = Calendar.getInstance();
+			 
+			// 2) get a java.util.Date from the calendar instance.
+			//this date will represent the current instant, or "now".
+			
+			java.util.Date now = calendar.getTime();
+			
+			 
+			// 3) a java current time (now) instance
+			Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
+			
+			Appointment appointment = new Appointment();  
+		    appointment.setClinic_detail(clinic_detail);
+		    appointment.setPatient_name(patient_name);
+		    appointment.setTime(time);
+		    appointment.setPatient_mobile_number(patient_mobile_number);
+		    appointment.setTime_stamp(currentTimestamp);
+		    appointment.setUser_name(user_name);
+		    appointment.setAppointment_date(appointment_date1);
+		    appointment.setAppointment_booked_date(( new SimpleDateFormat( "yyyy-MM-dd" ) ).format( Calendar.getInstance().getTime() ));
+		    
+		    
+		    //persisting the object
+		    
+		    try {
+				session1.save(appointment);  
+			} catch (HibernateException e) {
+				
+				e.printStackTrace();
+				LOGGER.error(e);
+			}
+		    
+		    //transaction is committed 
+		    
+	    t.commit(); 
+	    
+	    //close session 
+	    try {
+			session1.close();
+		} catch (HibernateException e) {
+			
+			e.printStackTrace();
+			LOGGER.error(e);
+		}  
+			
+			
+			
+
+	        
+		    
 				LOGGER.info("exiting from ConfirmAppointmentServlet ");
 		}
 }

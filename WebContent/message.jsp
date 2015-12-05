@@ -10,11 +10,6 @@
   
 <script type="text/javascript">
 
-function redirect(elem){
-	     elem.setAttribute("action","appointment.jsp");
-	     elem.submit();
-	}
-
 function myFunction(){
 	document.getElementById("wait_message").innerHTML = "message is being sent please wait";
 	
@@ -80,7 +75,7 @@ td:nth-of-type(2) {
 
 
 <div style="margin-left: 45px; margin-top: 10px; position: absolute;  "><b>
-	 <a href="appointment.jsp" onsubmit=" redirect(this);">home</a></b>
+	 <a href="appointment.jsp">home</a></b>
 </div>
 
 
@@ -100,10 +95,6 @@ td:nth-of-type(2) {
 
 </h3>
 </div>
-
-
-
-
 <center>
 
 <div id="wait_message" > </div>
