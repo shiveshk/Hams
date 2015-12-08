@@ -16,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -66,15 +65,14 @@ public class GenerateReportServlet extends HttpServlet {
 		
 		String initial_date = request.getParameter("initial_date"); 
 		String final_date = request.getParameter("final_date"); 
+		String select_user_name = request.getParameter("select_user_name"); 
+		System.out.print(select_user_name);
 		
 		
 		Date date1 = null ;
 		Date date2 = null;
 		
 		
-		
-		
-		HttpSession session = request.getSession(true);
 		
 		
 		

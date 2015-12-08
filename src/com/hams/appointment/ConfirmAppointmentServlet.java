@@ -213,7 +213,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 	        
 	        }
 			
-	//send button was pressed so we save data in our database and send message to patient side
+	//send button was pressed so we save data in our database
 	// creating session factory object  
 			
 			SessionFactory factory = getSessionFactory();

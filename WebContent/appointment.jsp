@@ -34,6 +34,11 @@
 			}
 %>
 
+<div style="margin-left: 45px; margin-top: 75px; position: absolute;">
+				<b>	<a href="DoctorDetail.jsp" >Enter Doctor Detail</a></b>
+</div>
+
+
 	<h4 style= "text-align:center">
 <%
 	String message = (String)request.getSession().getAttribute("message_response");

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="com.hams.data.Registration" table="clinic_registration">  
+    <id name="clinic_id" type="long">  
+     <generator class="increment"></generator>  
+    </id>  
+    <property name="clinic_name"  column="clinic_name" />  
+    <property name="address"  column="address" />  
+    <property name="contact_number"  column="contact_number" />
+    <property name="email"  column="email" /> 
+    <property name="authorised_doctor_name" column="authorised_doctor_name" />
+    <property name="payment_cycle" column="payment_cycle" /> 
+    <property name="agreement_mode" column="agreement_mode" /> 
+    <property name="price_quota" column="price_quota" /> 
+    <property name="time_stamp" column="time_stamp" /> 
+    <property name="agreement_date" column="agreement_date" /> 
+    
+    
+
+ </class>  
+ 
+ </hibernate-mapping>
+ 

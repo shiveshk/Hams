@@ -42,6 +42,8 @@
    
    	<mapping resource="appointment.hbm.xml"/>
    	<mapping resource="user.hbm.xml"/>
-
+	<mapping resource="registration.hbm.xml"/>
+   	
+   	
 </session-factory>
 </hibernate-configuration>
