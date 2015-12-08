@@ -182,15 +182,12 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 
 			for ( User user : list ) {
 				hide_report = user.getAdmin();
-			    
-			    
-			}
+			    }
 		
 		
 		
 		
         if (list.size() > 0) {
-            session1.close();
             
             HttpSession session = request.getSession();  
             session.setAttribute("hide_report" , hide_report );
@@ -204,7 +201,7 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
 			LOGGER.error(e);
 		}
         
-
+        
 		LOGGER.info("exiting from authenticateUser method of  LoginServlet ");
 		
         return false;

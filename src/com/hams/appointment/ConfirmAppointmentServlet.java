@@ -108,110 +108,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 			LOGGER.info("entered into if construct of ConfirmAppointmentServlet as send button clicked so save data and send message");
 			
 			
-			/* post method application to request for bhashsms api, so that patient get message  
-		    set 7 urlParameters like user ,password ,sender ,phone ,message ,priority and type needed to use api of bhashsms*/
-		    
-		    String urlParameters  = "user=hamsind&pass=12345&sender=HAMSIN&phone="+patient_mobile_number+"&text="+message+"&priority=ndnd&stype=normal";
-		    byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
-		    //find length of postData
-		    
-		    int    postDataLength = postData.length;
-		    String request1 = "http://bhashsms.com/api/sendmsg.php";
-		    URL    url            = new URL( request1 );
-		    HttpURLConnection conn = null ;
-			try {
-				LOGGER.info("message is being sent ");
-				
-				conn = (HttpURLConnection) url.openConnection();
-				conn.setDoOutput( true );
-			    conn.setInstanceFollowRedirects( false );
-			    conn.setRequestMethod( "POST" );
-			    conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
-			    conn.setRequestProperty( "charset", "utf-8");
-			    conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
-			    conn.setUseCaches( false );
-			    
-			    
-			  // Creates a new data output stream to write data to the connection object conn , to send data at bhassms.
-			    
-			    try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
-				       wr.write( postData );
-				    } catch (IOException e)
-				    {
-				    	e.printStackTrace();
-						LOGGER.error(e);
-				    }
-			    
-			    int responseCode = 0;
-			    
-				try {
-					responseCode = conn.getResponseCode();
-					
-					if(responseCode == 200)
-					{
-						LOGGER.info("response code is 200 message went successfully ");
-						
-						session.setAttribute("message_response", "message successfully sent");	
-						
-						 /* after sending message to patient side return user to appointment.jsp so user can do appointment for next patient */
-				        
-					    String nextJSP = "/appointment.jsp";
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
-						
-						try {
-							dispatcher.forward(request,response);
-						} catch (ServletException e) {
-							e.printStackTrace();
-							LOGGER.error(e);
-						} catch(IOException e ){
-							e.printStackTrace();
-							LOGGER.error(e);
-						}
-					}
-					
-					else
-					{
-						session.setAttribute("message_response", "message not sent please try again");
-						
-						 /* if message not sent successfully then tell to send again same message */
-				        
-					    String nextJSP = "/message.jsp";
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
-						
-						try {
-							dispatcher.forward(request,response);
-						} catch (ServletException e) {
-							e.printStackTrace();
-							LOGGER.error(e);
-						} catch(IOException e ){
-							e.printStackTrace();
-							LOGGER.error(e);
-						}
-					}
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-					LOGGER.error(e);
-				}
-				
-		        
-		        
-		        }
-
-
-			 catch (IOException e1) {
-				
-				e1.printStackTrace();
-				LOGGER.error(e1);
-			} finally {
-			    
-			    if (conn != null) {
-			        conn.disconnect();
-			    }
-			}          
 			
-	        
-	        }
 			
 	//send button was pressed so we save data in our database
 	// creating session factory object  
@@ -286,7 +183,110 @@ public class ConfirmAppointmentServlet extends HttpServlet {
 			LOGGER.error(e);
 		}  
 			
+	    /* post method application to request for bhashsms api, so that patient get message  
+	    set 7 urlParameters like user ,password ,sender ,phone ,message ,priority and type needed to use api of bhashsms*/
+	    
+	    String urlParameters  = "user=hamsind&pass=12345&sender=HAMSIN&phone="+patient_mobile_number+"&text="+message+"&priority=ndnd&stype=normal";
+	    byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+	    //find length of postData
+	    
+	    int    postDataLength = postData.length;
+	    String request1 = "http://bhashsms.com/api/sendmsg.php";
+	    URL    url            = new URL( request1 );
+	    HttpURLConnection conn = null ;
+		try {
+			LOGGER.info("message is being sent ");
 			
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput( true );
+		    conn.setInstanceFollowRedirects( false );
+		    conn.setRequestMethod( "POST" );
+		    conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+		    conn.setRequestProperty( "charset", "utf-8");
+		    conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+		    conn.setUseCaches( false );
+		    
+		    
+		  // Creates a new data output stream to write data to the connection object conn , to send data at bhassms.
+		    
+		    try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+			       wr.write( postData );
+			    } catch (IOException e)
+			    {
+			    	e.printStackTrace();
+					LOGGER.error(e);
+			    }
+		    
+		    int responseCode = 0;
+		    
+			try {
+				responseCode = conn.getResponseCode();
+				
+				if(responseCode == 200)
+				{
+					LOGGER.info("response code is 200 message went successfully ");
+					
+					session.setAttribute("message_response", "message successfully sent");	
+					
+					 /* after sending message to patient side return user to appointment.jsp so user can do appointment for next patient */
+			        
+				    String nextJSP = "/appointment.jsp";
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+					
+					try {
+						dispatcher.forward(request,response);
+					} catch (ServletException e) {
+						e.printStackTrace();
+						LOGGER.error(e);
+					} catch(IOException e ){
+						e.printStackTrace();
+						LOGGER.error(e);
+					}
+				}
+				
+				else
+				{
+					session.setAttribute("message_response", "message not sent please try again");
+					
+					 /* if message not sent successfully then tell to send again same message */
+			        
+				    String nextJSP = "/message.jsp";
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+					
+					try {
+						dispatcher.forward(request,response);
+					} catch (ServletException e) {
+						e.printStackTrace();
+						LOGGER.error(e);
+					} catch(IOException e ){
+						e.printStackTrace();
+						LOGGER.error(e);
+					}
+				}
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+				LOGGER.error(e);
+			}
+			
+	        
+	        
+	        }
+
+
+		 catch (IOException e1) {
+			
+			e1.printStackTrace();
+			LOGGER.error(e1);
+		} finally {
+		    
+		    if (conn != null) {
+		        conn.disconnect();
+		    }
+		}          
+		
+        
+        }
 			
 
 	        

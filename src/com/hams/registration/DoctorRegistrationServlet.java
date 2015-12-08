@@ -2,7 +2,6 @@ package com.hams.registration;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -68,6 +68,11 @@ public class DoctorRegistrationServlet extends HttpServlet {
 		String price_quota = null;
 		String agreement_date = null ;
 		String doctor_experience = null ;
+		String secondary_contact_number = null;
+		String emergency_contact_number = null;
+		String live_date = null ;
+		String doctor_specialization = null ;
+		
 		
 		
 		clinic_name = request.getParameter("clinic_name");
@@ -80,8 +85,12 @@ public class DoctorRegistrationServlet extends HttpServlet {
 		price_quota = request.getParameter("price_quota");
 		agreement_date = request.getParameter("agreement_date");
 		doctor_experience = request.getParameter("doctor_experience");
+		secondary_contact_number = request.getParameter("secondary_contact_number");
+		emergency_contact_number = request.getParameter("emergency_contact_number");
+		live_date = request.getParameter("live_date");
+		doctor_specialization = request.getParameter("doctor_specialization");
 		
-		System.out.print("haaha "+doctor_experience);
+		System.out.print("haaha "+doctor_experience+live_date+agreement_mode+payment_cycle);
 		//submit button was pressed so we save data in our database
 		
 		// creating session factory object  
@@ -134,7 +143,12 @@ public class DoctorRegistrationServlet extends HttpServlet {
 				registration.setPayment_cycle(payment_cycle);
 				registration.setPrice_quota(price_quota);
 				registration.setAgreement_date(agreement_date);
-				
+				registration.setAgreement_mode(agreement_mode);
+				registration.setDoctor_experience(doctor_experience);
+				registration.setEmergency_contact_number(emergency_contact_number);
+				registration.setLive_date(live_date);
+				registration.setSecondary_contact_number(secondary_contact_number);
+				registration.setDoctor_specialization(doctor_specialization);
 				
 			    
 			    
@@ -162,6 +176,10 @@ public class DoctorRegistrationServlet extends HttpServlet {
 				LOGGER.error(e);
 			}  
 		    
+		    //if after commit of transaction message saved successfully we show message to user that data saved
+		    HttpSession session = request.getSession();  
+		    session.setAttribute("data_saved", "Registration data saved successfully");	
+		    
  /* redirect user to show again doctorDetail registration form to enter detail of other doctor */
         	
             String nextJSP = "/DoctorDetail.jsp";
@@ -179,10 +197,8 @@ public class DoctorRegistrationServlet extends HttpServlet {
 				
 				
 				
-
-		        
-			    
-					LOGGER.info("exiting from DoctorRegistrationServlet ");
+			
+		    	LOGGER.info("exiting from DoctorRegistrationServlet ");
 			}
 		
 		

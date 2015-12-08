@@ -12,7 +12,8 @@ public class Registration {
 	  public String toString() {
 		
 		String registration = new String(" "+ clinic_id + " "+ clinic_name + " "+ address + 
-				" " + contact_number + " "+ email +" " + authorised_doctor_name + " "+ payment_cycle +" "+ agreement_mode +" " + price_quota +" "+ time_stamp +" " );
+				" " + contact_number + " "+ email +" " + authorised_doctor_name + " "+ payment_cycle +" "+ agreement_mode +" " + price_quota +" "+ time_stamp +" "+ doctor_experience+
+				" "+ secondary_contact_number +" "+ emergency_contact_number  +" "+ live_date +" "+ doctor_specialization );
 			    return registration ;
 	  }
 	
@@ -27,6 +28,12 @@ public class Registration {
 	private String price_quota ;
 	private java.sql.Timestamp time_stamp ;
 	private String agreement_date ;
+	
+	private String doctor_experience ;
+	private String secondary_contact_number ;
+	private String emergency_contact_number ;
+	private String live_date ;
+	private String doctor_specialization ;
 	
 	public long getClinic_id() {
 		return clinic_id;
@@ -114,5 +121,45 @@ public class Registration {
 
 	public void setAgreement_date(String agreement_date) {
 		this.agreement_date = agreement_date;
+	}
+
+	public String getDoctor_experience() {
+		return doctor_experience;
+	}
+
+	public void setDoctor_experience(String doctor_experience) {
+		this.doctor_experience = doctor_experience;
+	}
+
+	public String getSecondary_contact_number() {
+		return secondary_contact_number;
+	}
+
+	public void setSecondary_contact_number(String secondary_contact_number) {
+		this.secondary_contact_number = secondary_contact_number;
+	}
+
+	public String getEmergency_contact_number() {
+		return emergency_contact_number;
+	}
+
+	public void setEmergency_contact_number(String emergency_contact_number) {
+		this.emergency_contact_number = emergency_contact_number;
+	}
+
+	public String getLive_date() {
+		return live_date;
+	}
+
+	public void setLive_date(String live_date) {
+		this.live_date = live_date;
+	}
+
+	public String getDoctor_specialization() {
+		return doctor_specialization;
+	}
+
+	public void setDoctor_specialization(String doctor_specialization) {
+		this.doctor_specialization = doctor_specialization;
 	}
 }
