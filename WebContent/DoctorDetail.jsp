@@ -23,12 +23,24 @@
 </b></h5>
 
 <img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/>
+<% 
+			Boolean admin_check = (Boolean)request.getSession().getAttribute("hide_report");
+			if(admin_check){
+			%>	
+				<div style="margin-left: 45px; margin-top: 30px; position: absolute;">
+				<b>	<a href="generateReport.jsp" >Appointment Report</a></b>
+				</div>
+			<% 
+			}
+%>
 
-<div style="margin-left: 45px; margin-top: 10px; position: absolute;  "><b>
+
+<div style="margin-left: 45px; margin-top: 10px; "><b>
 	 <a href="appointment.jsp">home</a></b>
 </div>
 
-<h4 style= "text-align:center">
+
+<h4 style= "text-align:center ;">
 <%
 	String message = (String)request.getSession().getAttribute("data_saved");
 	if( message != null)
@@ -41,7 +53,7 @@
 
 <center>
 
-<div id="login-overlay" class="modal-dialog"  style="width:1000px;">
+<div id="login-overlay" class="modal-dialog"  style="width:960px; ">
      <div class="modal-content" id="modal-content" >
   
 				<h1>HAMS</h1>
@@ -68,7 +80,7 @@
 	 	 <td style="padding-right: 10px"><b>Agreement Mode: <sup>*</sup></b> </td> 
 	 	 <td><select name="agreement_mode" type="text" id="agreement_mode" required>
   			<option value="Per Patient Visit">Per Patient Visit</option>
-  			<option value="Montholy">Montholy</option>
+  			<option value="Monthly">Monthly</option>
   			<option value="weekly">weekly</option>  			
 		  </select>
 		 </td>
@@ -84,7 +96,7 @@
 	 	<td><select name="payment_cycle" type="text" id="payment_cycle" title="Please enter Payment Cycle" required>
   			<option value="weekly">Weekly</option>
   			<option value="bi_weekly">Bi-Weekly</option>  
-  			<option value="Montholy">Montholy</option>  			
+  			<option value="Monthly">Monthly</option>  			
 		  </select>
 		 </td>
 	 </tr> 
@@ -136,30 +148,36 @@
 		  </select>
 		</td>
 	 	
-	 	<td style="padding-right: 10px"><b>Clinic-Hams Live Date: </b> </td> 
-	 	<td><input type="date" id="live_date" name="live_date"  size=25 placeholder="live_date" title="Please enter Live Date"  ></td> 
+	 	<td style="padding-right: 10px"><b>Emergency Contact number: </b> </td> 
+	 	<td><input type="text" id="emergency_contact_number" name="emergency_contact_number"  size=25 placeholder="emergency_contact_number" title="Please enter Emergency Contact number"  ></td> 	 	
+	 	
 	 </tr>
 	 
 	 <tr class="row6"> 
 	 	<td style="padding-right: 10px"><b>Service Timing: <sup>*</sup></b> </td> 
 	 	<td><input type="text" id="doctor_experience" name="doctor_experience"  size=32 maxlength=5000 placeholder="doctor_experience" title="Please enter Doctor Experience" required/></td>
 	 	
-		<td style="padding-right: 10px"><b>Emergency Contact number: </b> </td> 
-	 	<td><input type="text" id="emergency_contact_number" name="emergency_contact_number"  size=25 placeholder="emergency_contact_number" title="Please enter Emergency Contact number"  ></td> 	 	
+		<td style="padding-right: 10px"><b>Secondary Contact number: </b> </td> 
+	 	<td><input type="text" id="secondary_contact_number" name="secondary_contact_number"  size=25 placeholder="secondary_contact_number" title="Please enter Secondary Contact number"  ></td> 	 	
 	 </tr>
 	 
 	 <tr class="row7"> 
 	 	 <td><b>Contact number: <sup>*</sup></b> </td>
 	 	<td><input type="text" id="contact_number" name="contact_number"  size=32 maxlength=5000  placeholder="contact_number" title="Please enter Contact Number" required/></td>
 	 		
-	 	<td style="padding-right: 10px"><b>Secondary Contact number: </b> </td> 
-	 	<td><input type="text" id="secondary_contact_number" name="secondary_contact_number"  size=25 placeholder="secondary_contact_number" title="Please enter Secondary Contact number"  ></td> 	 	
+	 	<td style="padding-right: 10px"><b>Doctor OnBoard: </b> </td> 
+	 	<td><input type="checkbox" id="onboard" name="onboard"  size=32 placeholder="onboard"  /></td>
 	 </tr>
 	 
 	 <tr class="row8">
-	 	<td style="padding-right: 10px"><b>email: </b> </td> 
+	 	<td style="padding-right: 10px"><b>Email: </b> </td> 
 	 	<td><input type="text" id="email" name="email"  size=32 maxlength=5000 placeholder="email" title="Please enter email" /></td>
+	 	
+	 	
 	 </tr>
+	 </tr>
+	 
+	 
 </tbody>	 
 	  
 </table> 

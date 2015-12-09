@@ -70,8 +70,9 @@ public class DoctorRegistrationServlet extends HttpServlet {
 		String doctor_experience = null ;
 		String secondary_contact_number = null;
 		String emergency_contact_number = null;
-		String live_date = null ;
+		
 		String doctor_specialization = null ;
+		String onboard = null ;
 		
 		
 		
@@ -87,10 +88,11 @@ public class DoctorRegistrationServlet extends HttpServlet {
 		doctor_experience = request.getParameter("doctor_experience");
 		secondary_contact_number = request.getParameter("secondary_contact_number");
 		emergency_contact_number = request.getParameter("emergency_contact_number");
-		live_date = request.getParameter("live_date");
-		doctor_specialization = request.getParameter("doctor_specialization");
 		
-		System.out.print("haaha "+doctor_experience+live_date+agreement_mode+payment_cycle);
+		doctor_specialization = request.getParameter("doctor_specialization");
+		onboard = request.getParameter("onboard");
+		
+		System.out.print("haaha "+onboard);
 		//submit button was pressed so we save data in our database
 		
 		// creating session factory object  
@@ -146,9 +148,10 @@ public class DoctorRegistrationServlet extends HttpServlet {
 				registration.setAgreement_mode(agreement_mode);
 				registration.setDoctor_experience(doctor_experience);
 				registration.setEmergency_contact_number(emergency_contact_number);
-				registration.setLive_date(live_date);
+				
 				registration.setSecondary_contact_number(secondary_contact_number);
 				registration.setDoctor_specialization(doctor_specialization);
+				registration.setOnboard(onboard);
 				
 			    
 			    

@@ -65,15 +65,11 @@ public class GenerateReportServlet extends HttpServlet {
 		
 		String initial_date = request.getParameter("initial_date"); 
 		String final_date = request.getParameter("final_date"); 
-		String select_user_name = request.getParameter("select_user_name"); 
-		System.out.print(select_user_name);
+		
 		
 		
 		Date date1 = null ;
 		Date date2 = null;
-		
-		
-		
 		
 		
 		//define format of date 

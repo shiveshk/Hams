@@ -16,16 +16,16 @@
     <property name="payment_cycle" column="payment_cycle" /> 
     <property name="agreement_mode" column="agreement_mode" /> 
     <property name="price_quota" column="price_quota" /> 
-    <property name="time_stamp" column="time_stamp" /> 
+    
     <property name="agreement_date" column="agreement_date" /> 
     
     <property name="doctor_experience" column="doctor_experience" /> 
     <property name="secondary_contact_number" column="secondary_contact_number" /> 
     <property name="emergency_contact_number" column="emergency_contact_number" /> 
-    <property name="live_date" column="live_date" /> 
+    
     <property name="doctor_specialization" column="doctor_specialization" /> 
-    
-    
+    <property name="onboard" column="onboard" /> 
+    <property name="time_stamp" column="time_stamp" /> 
     
     
 

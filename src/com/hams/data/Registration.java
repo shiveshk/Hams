@@ -13,7 +13,7 @@ public class Registration {
 		
 		String registration = new String(" "+ clinic_id + " "+ clinic_name + " "+ address + 
 				" " + contact_number + " "+ email +" " + authorised_doctor_name + " "+ payment_cycle +" "+ agreement_mode +" " + price_quota +" "+ time_stamp +" "+ doctor_experience+
-				" "+ secondary_contact_number +" "+ emergency_contact_number  +" "+ live_date +" "+ doctor_specialization );
+				" "+ secondary_contact_number +" "+ emergency_contact_number  +" "+ onboard +" "+ doctor_specialization );
 			    return registration ;
 	  }
 	
@@ -32,9 +32,18 @@ public class Registration {
 	private String doctor_experience ;
 	private String secondary_contact_number ;
 	private String emergency_contact_number ;
-	private String live_date ;
-	private String doctor_specialization ;
 	
+	private String doctor_specialization ;
+	private String onboard ;
+	
+	public String getOnboard() {
+		return onboard;
+	}
+
+	public void setOnboard(String onboard) {
+		this.onboard = onboard;
+	}
+
 	public long getClinic_id() {
 		return clinic_id;
 	}
@@ -147,14 +156,7 @@ public class Registration {
 		this.emergency_contact_number = emergency_contact_number;
 	}
 
-	public String getLive_date() {
-		return live_date;
-	}
-
-	public void setLive_date(String live_date) {
-		this.live_date = live_date;
-	}
-
+	
 	public String getDoctor_specialization() {
 		return doctor_specialization;
 	}

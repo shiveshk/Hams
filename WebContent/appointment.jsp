@@ -31,7 +31,7 @@
 				<b>	<a href="generateReport.jsp" >Appointment Report</a></b>
 				</div>
 			<% 
-			}
+	        admin_check = true ;		}
 %>
 
 <div style="margin-left: 45px; margin-top: 75px; position: absolute;">
