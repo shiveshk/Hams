@@ -9,11 +9,29 @@
              com.hams.appointment.ContextListener 
     </listener-class>
   </listener>
-  
   <context-param>
     <param-name>log4j-config-location</param-name>
     <param-value>log4j.properties</param-value>
   </context-param>
+  
+<error-page>
+    <error-code>404</error-code>
+    <location>/error.jsp</location>
+</error-page>
+
+<error-page>
+    <error-code>400</error-code>
+    <location>/error.jsp</location>
+</error-page>
+<error-page>
+    <error-code>500</error-code>
+    <location>/error.jsp</location>
+</error-page>
+
+<error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error.jsp</location>
+</error-page> 
   
   <servlet>
     <servlet-name>generateReport</servlet-name>
@@ -23,7 +41,6 @@
     <servlet-name>generateReport</servlet-name>
     <url-pattern>/generateReport</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>DoctorDetail</servlet-name>
     <jsp-file>/DoctorDetail.jsp</jsp-file>
@@ -32,7 +49,6 @@
     <servlet-name>DoctorDetail</servlet-name>
     <url-pattern>/DoctorDetail</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>AppointmentServlet</display-name>
@@ -43,7 +59,6 @@
     <servlet-name>AppointmentServlet</servlet-name>
     <url-pattern>/AppointmentServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>GenerateReportServlet</display-name>
@@ -54,7 +69,6 @@
     <servlet-name>GenerateReportServlet</servlet-name>
     <url-pattern>/GenerateReportServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -65,7 +79,6 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>ConfirmAppointmentServlet</display-name>
@@ -76,7 +89,6 @@
     <servlet-name>ConfirmAppointmentServlet</servlet-name>
     <url-pattern>/ConfirmAppointmentServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>LogoutServlet</display-name>
@@ -87,7 +99,6 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>DoctorRegistrationServlet</display-name>
@@ -98,5 +109,14 @@
     <servlet-name>DoctorRegistrationServlet</servlet-name>
     <url-pattern>/DoctorRegistrationServlet</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <description></description>
+    <display-name>ConvertToJson</display-name>
+    <servlet-name>ConvertToJson</servlet-name>
+    <servlet-class>com.hams.PullData.ConvertToJson</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConvertToJson</servlet-name>
+    <url-pattern>/ConvertToJson</url-pattern>
+  </servlet-mapping>
 </web-app>

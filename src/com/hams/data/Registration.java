@@ -35,6 +35,7 @@ public class Registration {
 	
 	private String doctor_specialization ;
 	private String onboard ;
+	private String user_name;
 	
 	public String getOnboard() {
 		return onboard;
@@ -157,6 +158,14 @@ public class Registration {
 	}
 
 	
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
 	public String getDoctor_specialization() {
 		return doctor_specialization;
 	}

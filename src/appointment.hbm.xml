@@ -6,7 +6,7 @@
  <hibernate-mapping>  
   <class name="com.hams.data.Appointment" table="appointment">  
     <id name="appointment_id" type="long">  
-     <generator class="increment"></generator>  
+    
     </id>  
     <property name="patient_name"  column="patient_name" />  
     <property name="clinic_detail"  column="clinic_detail" />

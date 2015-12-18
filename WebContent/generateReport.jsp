@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page errorPage="error.jsp" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,6 +67,8 @@
 	 <a href="appointment.jsp" onsubmit=" redirect(this);">home</a></b>
 </div>
 
+
+
 <center>
 <div id="login-overlay" class="modal-dialog"  style="width:1000px; margin-top: 100px;">
      <div class="modal-content" id="modal-content" >
@@ -77,16 +80,14 @@
 
 <td style = "padding-right: 324px;">
 	<form action="GenerateReportServlet" method="post">
+  		From 
+  			<input type="date" name="initial_date">
   
-  	From 
-  		<input type="date" name="initial_date">
   
-  
-  	To
-  		<input type="date" name="final_date">
-  		<input type="submit">
-  
-</form>
+  		To
+  			<input type="date" name="final_date">
+  			<input type="submit">
+    </form>
 </td>
 <td>			
 		<input type="button"   onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel">	
@@ -97,10 +98,6 @@
 </table>
 
 <form>
-
-
-	 
-	 
 	<div id="div2"> 
         <table border="1" id="testTable">
             <tr>
@@ -114,9 +111,8 @@
                 	<th>appointment_date</th>
                 	<th>appointment_booked_date</th>
                 </tr>
-                 
-               <s:forEach items="${data}" var="item">
-    			<tr>
+                <s:forEach items="${data}" var="item">
+    			 <tr>
       				<td><s:out value="${item.appointment_id}" /></td>
       				<td><s:out value="${item.patient_name}" /></td>
       				<td><s:out value="${item.clinic_detail}" /></td>
@@ -125,22 +121,14 @@
       				<td><s:out value="${item.user_name}" /></td>
       				<td><s:out value="${item.appointment_date}" /></td>
       				<td><s:out value="${item.appointment_booked_date}" /></td>
-
-      						
-    			 </tr>
+      			 </tr>
   				</s:forEach>
-  			
-  		 </table>
+  		</table>
   	</div>
-  			
-  			<div style="float:right"> Total Appointment : <s:out value="${size}" /> </div>   
-
+  		<div style="float:right"> Total Appointment : <s:out value="${size}" /> </div>   
 </form>
-            
-
-
-</div>
-</div>
+     </div>
+  </div>
 </div>
 </center>
 

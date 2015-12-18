@@ -1,35 +1,32 @@
 package com.hams.data;
 
-
-
-
-
 import javax.persistence.Entity;
-
 
 @Entity
 public class Appointment {
-	
-	public Appointment() {}
-	
-	
-	private String user_name ; 
+
+	public Appointment() {
+	}
+
+	private String user_name;
+
 	public String getUser_name() {
 		return user_name;
 	}
 
 	@Override
-	  public String toString() {
-		
-		String testingappointment = new String(" "+ appointment_id + " "+ patient_name + " "+ clinic_detail + 
-				" " + time + " "+ time_stamp +" " +patient_mobile_number+ " "+ user_name+" "+appointment_date+" " +appointment_booked_date+" " );
-			    return testingappointment ;
-	  }
-	
+	public String toString() {
 
-	private String appointment_date ;
-	private String appointment_booked_date ;
-	
+		String testingappointment = new String(" " + appointment_id + " "
+				+ patient_name + " " + clinic_detail + " " + time + " "
+				+ time_stamp + " " + patient_mobile_number + " " + user_name
+				+ " " + appointment_date + " " + appointment_booked_date + " ");
+		return testingappointment;
+	}
+
+	private String appointment_date;
+	private String appointment_booked_date;
+
 	public String getAppointment_date() {
 		return appointment_date;
 	}
@@ -46,16 +43,12 @@ public class Appointment {
 		this.appointment_booked_date = appointment_booked_date;
 	}
 
-
-	
-	
-	
-	
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
 
 	private String patient_mobile_number;
+
 	public String getPatient_mobile_number() {
 		return patient_mobile_number;
 	}
@@ -63,9 +56,9 @@ public class Appointment {
 	public void setPatient_mobile_number(String patient_mobile_number) {
 		this.patient_mobile_number = patient_mobile_number;
 	}
-	
 
-	private long appointment_id ;
+	private long appointment_id;
+
 	public long getAppointment_id() {
 		return appointment_id;
 	}
@@ -74,12 +67,11 @@ public class Appointment {
 		this.appointment_id = appointment_id;
 	}
 
-	private String patient_name ;
-	private String clinic_detail ;
-	private String time ;
-	private java.sql.Timestamp time_stamp ;
-	
-	
+	private String patient_name;
+	private String clinic_detail;
+	private String time;
+	private java.sql.Timestamp time_stamp;
+
 	public String getPatient_name() {
 		return patient_name;
 	}
@@ -111,14 +103,5 @@ public class Appointment {
 	public void setTime_stamp(java.sql.Timestamp time_stamp) {
 		this.time_stamp = time_stamp;
 	}
-
-	
-	
-	
-
-
-	
-	
-
 
 }

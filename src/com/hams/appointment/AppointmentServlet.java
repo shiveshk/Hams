@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,13 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 
-
 @WebServlet("/AppointmentServlet")
-
-
 public class AppointmentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -81,9 +74,6 @@ public class AppointmentServlet extends HttpServlet {
         session.setAttribute("time", time);
         session.setAttribute("message", message);
         session.setAttribute("appointment_date", appointment_date1);
-        
-        
-        
         
         //after clicking submit in appointment.jsp control will go to message.jsp to show message 
         String nextJSP = "/message.jsp";

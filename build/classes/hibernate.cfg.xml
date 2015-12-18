@@ -2,48 +2,32 @@
 <!DOCTYPE hibernate-configuration SYSTEM 
     "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-   <session-factory>
+ <session-factory>
 	<property name="hbm2ddl.auto">update</property>  
 	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>   
   	<property name="connection.pool_size">100</property> 
    	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-   	
    	<property name="connection.autoReconnect">true</property>
     <property name="connection.autoReconnectForPools">true</property>
     <property name="connection.is-connection-validation-required">true</property>
-    
-     <!-- Sessions and transactions -->
-
-		
-	<property name="current_session_context_class">thread</property>
-	
-	
-		
-	
-	
+    <!-- Sessions and transactions -->
+    <property name="current_session_context_class">thread</property>
 	<!-- Echo all executed SQL to stdout -->
 	<property name="show_sql">true</property>
-		
 	<property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
-
-   	<!-- Assume hams is the database name -->
+	<!-- Assume hams is the database name -->
    	<property name="hibernate.connection.url">
       	jdbc:mysql://localhost:3306/hams?autoReconnect=true&amp;
    	</property>
-  
-   	<property name="hibernate.connection.username">
+  	<property name="hibernate.connection.username">
       root
    	</property>
    	<property name="hibernate.connection.password">
       1234
    	</property>
-
-   	<!-- List of XML mapping files -->
-   
+ 	<!-- List of XML mapping files -->
    	<mapping resource="appointment.hbm.xml"/>
    	<mapping resource="user.hbm.xml"/>
 	<mapping resource="registration.hbm.xml"/>
-   	
-   	
-</session-factory>
+ </session-factory>
 </hibernate-configuration>

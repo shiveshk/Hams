@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="validation.js"></script>
-  
-  
 <link rel="stylesheet" type="text/css" href="hams.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>hams</title>

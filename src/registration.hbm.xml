@@ -25,6 +25,7 @@
     
     <property name="doctor_specialization" column="doctor_specialization" /> 
     <property name="onboard" column="onboard" /> 
+    <property name="user_name" column="user_name" /> 
     <property name="time_stamp" column="time_stamp" /> 
     
     

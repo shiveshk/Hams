@@ -74,6 +74,9 @@ public class DoctorRegistrationServlet extends HttpServlet {
 		String doctor_specialization = null ;
 		String onboard = null ;
 		
+		//Take user_name who is logged in to enter data from
+		HttpSession session = request.getSession(true);
+		String user_name = session.getAttribute("name").toString();
 		
 		
 		clinic_name = request.getParameter("clinic_name");
@@ -92,7 +95,7 @@ public class DoctorRegistrationServlet extends HttpServlet {
 		doctor_specialization = request.getParameter("doctor_specialization");
 		onboard = request.getParameter("onboard");
 		
-		System.out.print("haaha "+onboard);
+		
 		//submit button was pressed so we save data in our database
 		
 		// creating session factory object  
@@ -152,6 +155,7 @@ public class DoctorRegistrationServlet extends HttpServlet {
 				registration.setSecondary_contact_number(secondary_contact_number);
 				registration.setDoctor_specialization(doctor_specialization);
 				registration.setOnboard(onboard);
+				registration.setUser_name(user_name);
 				
 			    
 			    
@@ -180,8 +184,8 @@ public class DoctorRegistrationServlet extends HttpServlet {
 			}  
 		    
 		    //if after commit of transaction message saved successfully we show message to user that data saved
-		    HttpSession session = request.getSession();  
-		    session.setAttribute("data_saved", "Registration data saved successfully");	
+		    HttpSession session2 = request.getSession();  
+		    session2.setAttribute("data_saved", "Registration data saved successfully");	
 		    
  /* redirect user to show again doctorDetail registration form to enter detail of other doctor */
         	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page errorPage="error.jsp" %>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +15,17 @@
 <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
-<h5 style=" margin-top: 45px; margin-right:45px ;float:right"><b>
+<h5 style=" margin-top: 45px; margin-right:25px ;float:right"><b>
       	<% 
 			String username = (String)request.getSession().getAttribute("name"); 
 			out.println("Welcome "+username);
 		%><br>
       	<a href="LogoutServlet">Logout</a>
 </b></h5>
+
+<form action="ConvertToJson" method="post" style=" margin-top: 25px; margin-right:45px ;float:right">
+  		 <input type="submit" value="Export to Json Data" >
+</form>
 
 <img src = "images/HAMSLogo.jpg" alt="hamslogo" id="img1" style=" margin-left: 45px; "/>
 <% 
@@ -113,7 +118,7 @@
 	 
 	 	
 	 	<td style="padding-right: 10px"><b>Doctor Experience: <sup>*</sup></b> </td> 
-	 	 <td><select name="doctor_experience" type="text" id="doctor_experience" required>
+	 	 <td><select name="doctor_experience" type="text" id="doctor_experience" >
   			<option value="0">0</option>
   			<option value="1">1</option>
   			<option value="2">2</option>
@@ -155,7 +160,7 @@
 	 
 	 <tr class="row6"> 
 	 	<td style="padding-right: 10px"><b>Service Timing: <sup>*</sup></b> </td> 
-	 	<td><input type="text" id="doctor_experience" name="doctor_experience"  size=32 maxlength=5000 placeholder="doctor_experience" title="Please enter Doctor Experience" required/></td>
+	 	<td><input type="text" id="doctor_experience" name="doctor_experience"  size=32 maxlength=5000 placeholder="doctor_experience" title="Please enter Doctor Experience" /></td>
 	 	
 		<td style="padding-right: 10px"><b>Secondary Contact number: </b> </td> 
 	 	<td><input type="text" id="secondary_contact_number" name="secondary_contact_number"  size=25 placeholder="secondary_contact_number" title="Please enter Secondary Contact number"  ></td> 	 	
